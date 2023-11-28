@@ -1,0 +1,2792 @@
+[
+    {
+        "name": "barairo",
+        "r": 233,
+        "g": 84,
+        "b": 107
+    },
+    {
+        "name": "karakurenai",
+        "r": 233,
+        "g": 84,
+        "b": 100
+    },
+    {
+        "name": "imayouiro",
+        "r": 208,
+        "g": 87,
+        "b": 107
+    },
+    {
+        "name": "nakabeni",
+        "r": 200,
+        "g": 81,
+        "b": 121
+    },
+    {
+        "name": "ginshu",
+        "r": 200,
+        "g": 85,
+        "b": 84
+    },
+    {
+        "name": "benikabairo",
+        "r": 187,
+        "g": 85,
+        "b": 72
+    },
+    {
+        "name": "akacha",
+        "r": 187,
+        "g": 85,
+        "b": 53
+    },
+    {
+        "name": "rengairo",
+        "r": 181,
+        "g": 82,
+        "b": 51
+    },
+    {
+        "name": "suzumecha",
+        "r": 170,
+        "g": 79,
+        "b": 55
+    },
+    {
+        "name": "danjuuroucha",
+        "r": 159,
+        "g": 86,
+        "b": 58
+    },
+    {
+        "name": "kakishibuiro",
+        "r": 159,
+        "g": 86,
+        "b": 58
+    },
+    {
+        "name": "hiwadairo",
+        "r": 150,
+        "g": 80,
+        "b": 54
+    },
+    {
+        "name": "chairo",
+        "r": 150,
+        "g": 80,
+        "b": 66
+    },
+    {
+        "name": "azukiiro",
+        "r": 150,
+        "g": 81,
+        "b": 77
+    },
+    {
+        "name": "tobiiro",
+        "r": 149,
+        "g": 72,
+        "b": 63
+    },
+    {
+        "name": "benitobi",
+        "r": 154,
+        "g": 73,
+        "b": 63
+    },
+    {
+        "name": "suou",
+        "r": 158,
+        "g": 61,
+        "b": 63
+    },
+    {
+        "name": "beniebicha",
+        "r": 167,
+        "g": 56,
+        "b": 54
+    },
+    {
+        "name": "ake",
+        "r": 186,
+        "g": 38,
+        "b": 54
+    },
+    {
+        "name": "akaneiro",
+        "r": 183,
+        "g": 40,
+        "b": 46
+    },
+    {
+        "name": "shinku",
+        "r": 162,
+        "g": 32,
+        "b": 65
+    },
+    {
+        "name": "koikurenai",
+        "r": 162,
+        "g": 32,
+        "b": 65
+    },
+    {
+        "name": "enji",
+        "r": 185,
+        "g": 64,
+        "b": 71
+    },
+    {
+        "name": "akabeni",
+        "r": 197,
+        "g": 61,
+        "b": 67
+    },
+    {
+        "name": "akani",
+        "r": 206,
+        "g": 82,
+        "b": 66
+    },
+    {
+        "name": "kabairo",
+        "r": 205,
+        "g": 94,
+        "b": 60
+    },
+    {
+        "name": "kourozen",
+        "r": 214,
+        "g": 106,
+        "b": 53
+    },
+    {
+        "name": "niiro",
+        "r": 228,
+        "g": 94,
+        "b": 50
+    },
+    {
+        "name": "terigaki",
+        "r": 235,
+        "g": 98,
+        "b": 56
+    },
+    {
+        "name": "kakiiro",
+        "r": 237,
+        "g": 109,
+        "b": 61
+    },
+    {
+        "name": "entan'iro",
+        "r": 236,
+        "g": 109,
+        "b": 81
+    },
+    {
+        "name": "ouni",
+        "r": 238,
+        "g": 121,
+        "b": 72
+    },
+    {
+        "name": "akakuchibairo",
+        "r": 219,
+        "g": 132,
+        "b": 73
+    },
+    {
+        "name": "beniukon",
+        "r": 203,
+        "g": 131,
+        "b": 71
+    },
+    {
+        "name": "kitsuneiro",
+        "r": 195,
+        "g": 135,
+        "b": 67
+    },
+    {
+        "name": "oudoiro",
+        "r": 195,
+        "g": 145,
+        "b": 67
+    },
+    {
+        "name": "kigaracha",
+        "r": 185,
+        "g": 140,
+        "b": 70
+    },
+    {
+        "name": "kitsurubami",
+        "r": 182,
+        "g": 141,
+        "b": 76
+    },
+    {
+        "name": "choujizome",
+        "r": 173,
+        "g": 125,
+        "b": 76
+    },
+    {
+        "name": "kouzome",
+        "r": 173,
+        "g": 125,
+        "b": 76
+    },
+    {
+        "name": "shikancha",
+        "r": 173,
+        "g": 126,
+        "b": 78
+    },
+    {
+        "name": "biwacha",
+        "r": 174,
+        "g": 124,
+        "b": 79
+    },
+    {
+        "name": "kogarekou",
+        "r": 174,
+        "g": 124,
+        "b": 88
+    },
+    {
+        "name": "hajiiro",
+        "r": 183,
+        "g": 123,
+        "b": 87
+    },
+    {
+        "name": "kawarakeiro",
+        "r": 195,
+        "g": 120,
+        "b": 84
+    },
+    {
+        "name": "rakudairo",
+        "r": 191,
+        "g": 121,
+        "b": 78
+    },
+    {
+        "name": "kohakuiro",
+        "r": 191,
+        "g": 120,
+        "b": 58
+    },
+    {
+        "name": "tsuchiiro",
+        "r": 188,
+        "g": 118,
+        "b": 60
+    },
+    {
+        "name": "kurumiiro",
+        "r": 168,
+        "g": 111,
+        "b": 76
+    },
+    {
+        "name": "soho",
+        "r": 171,
+        "g": 105,
+        "b": 83
+    },
+    {
+        "name": "tonocha",
+        "r": 159,
+        "g": 111,
+        "b": 85
+    },
+    {
+        "name": "soudenkaracha",
+        "r": 161,
+        "g": 109,
+        "b": 93
+    },
+    {
+        "name": "suoukou",
+        "r": 168,
+        "g": 105,
+        "b": 101
+    },
+    {
+        "name": "asasuou",
+        "r": 162,
+        "g": 87,
+        "b": 104
+    },
+    {
+        "name": "kyoumurasaki",
+        "r": 157,
+        "g": 91,
+        "b": 139
+    },
+    {
+        "name": "futaai",
+        "r": 145,
+        "g": 92,
+        "b": 139
+    },
+    {
+        "name": "kodaimurasaki",
+        "r": 137,
+        "g": 91,
+        "b": 138
+    },
+    {
+        "name": "murasaki",
+        "r": 136,
+        "g": 72,
+        "b": 152
+    },
+    {
+        "name": "nasukon",
+        "r": 130,
+        "g": 72,
+        "b": 128
+    },
+    {
+        "name": "ebizome",
+        "r": 122,
+        "g": 65,
+        "b": 113
+    },
+    {
+        "name": "ankoushoku",
+        "r": 116,
+        "g": 50,
+        "b": 92
+    },
+    {
+        "name": "budouiro",
+        "r": 82,
+        "g": 47,
+        "b": 96
+    },
+    {
+        "name": "kuwanomiiro",
+        "r": 85,
+        "g": 41,
+        "b": 91
+    },
+    {
+        "name": "fukamurasaki",
+        "r": 73,
+        "g": 55,
+        "b": 89
+    },
+    {
+        "name": "koinezu",
+        "r": 79,
+        "g": 69,
+        "b": 92
+    },
+    {
+        "name": "kachiiro",
+        "r": 77,
+        "g": 76,
+        "b": 97
+    },
+    {
+        "name": "sabinezu",
+        "r": 71,
+        "g": 88,
+        "b": 92
+    },
+    {
+        "name": "sabitetsuonando",
+        "r": 72,
+        "g": 88,
+        "b": 89
+    },
+    {
+        "name": "kawairo",
+        "r": 71,
+        "g": 89,
+        "b": 80
+    },
+    {
+        "name": "mushiao",
+        "r": 58,
+        "g": 91,
+        "b": 82
+    },
+    {
+        "name": "biroudo",
+        "r": 47,
+        "g": 93,
+        "b": 80
+    },
+    {
+        "name": "kourainando",
+        "r": 44,
+        "g": 79,
+        "b": 84
+    },
+    {
+        "name": "aokachi",
+        "r": 57,
+        "g": 62,
+        "b": 79
+    },
+    {
+        "name": "aitetsu",
+        "r": 57,
+        "g": 63,
+        "b": 76
+    },
+    {
+        "name": "youkan'iro",
+        "r": 56,
+        "g": 60,
+        "b": 60
+    },
+    {
+        "name": "binroujizome",
+        "r": 67,
+        "g": 61,
+        "b": 60
+    },
+    {
+        "name": "sensaicha",
+        "r": 73,
+        "g": 74,
+        "b": 65
+    },
+    {
+        "name": "sensaicha",
+        "r": 71,
+        "g": 75,
+        "b": 66
+    },
+    {
+        "name": "aisumicha",
+        "r": 71,
+        "g": 74,
+        "b": 77
+    },
+    {
+        "name": "keshizumiiro",
+        "r": 82,
+        "g": 78,
+        "b": 77
+    },
+    {
+        "name": "benikeshinezumi",
+        "r": 82,
+        "g": 71,
+        "b": 72
+    },
+    {
+        "name": "kurotsurubami",
+        "r": 84,
+        "g": 74,
+        "b": 71
+    },
+    {
+        "name": "aikobicha",
+        "r": 85,
+        "g": 86,
+        "b": 71
+    },
+    {
+        "name": "aimirucha",
+        "r": 86,
+        "g": 86,
+        "b": 75
+    },
+    {
+        "name": "mirucha",
+        "r": 90,
+        "g": 84,
+        "b": 75
+    },
+    {
+        "name": "dobunezumi",
+        "r": 89,
+        "g": 84,
+        "b": 85
+    },
+    {
+        "name": "fujisusutake",
+        "r": 90,
+        "g": 83,
+        "b": 89
+    },
+    {
+        "name": "sumi",
+        "r": 89,
+        "g": 88,
+        "b": 87
+    },
+    {
+        "name": "yanagisusutake",
+        "r": 91,
+        "g": 99,
+        "b": 86
+    },
+    {
+        "name": "kabachairo",
+        "r": 114,
+        "g": 98,
+        "b": 80
+    },
+    {
+        "name": "kobicha",
+        "r": 113,
+        "g": 98,
+        "b": 70
+    },
+    {
+        "name": "kigaracha",
+        "r": 118,
+        "g": 92,
+        "b": 71
+    },
+    {
+        "name": "susutakeiro",
+        "r": 111,
+        "g": 81,
+        "b": 76
+    },
+    {
+        "name": "kogecha",
+        "r": 111,
+        "g": 75,
+        "b": 62
+    },
+    {
+        "name": "benihihada",
+        "r": 123,
+        "g": 71,
+        "b": 65
+    },
+    {
+        "name": "ebicha",
+        "r": 119,
+        "g": 60,
+        "b": 48
+    },
+    {
+        "name": "kurikawacha",
+        "r": 109,
+        "g": 60,
+        "b": 50
+    },
+    {
+        "name": "chakasshoku",
+        "r": 102,
+        "g": 64,
+        "b": 50
+    },
+    {
+        "name": "sekkasshoku",
+        "r": 104,
+        "g": 63,
+        "b": 54
+    },
+    {
+        "name": "kenpouiro",
+        "r": 84,
+        "g": 63,
+        "b": 50
+    },
+    {
+        "name": "kuriiro",
+        "r": 85,
+        "g": 71,
+        "b": 56
+    },
+    {
+        "name": "nisemurasaki",
+        "r": 81,
+        "g": 55,
+        "b": 67
+    },
+    {
+        "name": "murasakitobi",
+        "r": 95,
+        "g": 65,
+        "b": 75
+    },
+    {
+        "name": "kokiiro",
+        "r": 99,
+        "g": 73,
+        "b": 80
+    },
+    {
+        "name": "keshimurasaki",
+        "r": 89,
+        "g": 66,
+        "b": 85
+    },
+    {
+        "name": "tetsuonando",
+        "r": 69,
+        "g": 87,
+        "b": 101
+    },
+    {
+        "name": "omeshicha",
+        "r": 67,
+        "g": 103,
+        "b": 107
+    },
+    {
+        "name": "noshimehanairo",
+        "r": 66,
+        "g": 101,
+        "b": 121
+    },
+    {
+        "name": "konnezu",
+        "r": 68,
+        "g": 97,
+        "b": 123
+    },
+    {
+        "name": "omeshionando",
+        "r": 76,
+        "g": 100,
+        "b": 115
+    },
+    {
+        "name": "sabionando",
+        "r": 83,
+        "g": 114,
+        "b": 125
+    },
+    {
+        "name": "seiheki",
+        "r": 71,
+        "g": 131,
+        "b": 132
+    },
+    {
+        "name": "masuhanairo",
+        "r": 91,
+        "g": 126,
+        "b": 145
+    },
+    {
+        "name": "sabiasagi",
+        "r": 92,
+        "g": 146,
+        "b": 145
+    },
+    {
+        "name": "ainezu",
+        "r": 108,
+        "g": 132,
+        "b": 141
+    },
+    {
+        "name": "usuhanairo",
+        "r": 105,
+        "g": 138,
+        "b": 171
+    },
+    {
+        "name": "fujinando",
+        "r": 112,
+        "g": 108,
+        "b": 170
+    },
+    {
+        "name": "benikakehanairo",
+        "r": 104,
+        "g": 105,
+        "b": 155
+    },
+    {
+        "name": "sumireiro",
+        "r": 112,
+        "g": 88,
+        "b": 163
+    },
+    {
+        "name": "edomurasaki",
+        "r": 116,
+        "g": 83,
+        "b": 153
+    },
+    {
+        "name": "aomurasaki",
+        "r": 103,
+        "g": 69,
+        "b": 152
+    },
+    {
+        "name": "shoubuiro",
+        "r": 103,
+        "g": 65,
+        "b": 150
+    },
+    {
+        "name": "honmurasaki",
+        "r": 101,
+        "g": 49,
+        "b": 142
+    },
+    {
+        "name": "kon'ai",
+        "r": 74,
+        "g": 72,
+        "b": 142
+    },
+    {
+        "name": "benikikyou",
+        "r": 77,
+        "g": 67,
+        "b": 152
+    },
+    {
+        "name": "kikyouiro",
+        "r": 86,
+        "g": 84,
+        "b": 162
+    },
+    {
+        "name": "konkikyou",
+        "r": 77,
+        "g": 90,
+        "b": 175
+    },
+    {
+        "name": "hanairo",
+        "r": 77,
+        "g": 90,
+        "b": 175
+    },
+    {
+        "name": "gunjouiro",
+        "r": 76,
+        "g": 108,
+        "b": 179
+    },
+    {
+        "name": "kakitsubatairo",
+        "r": 62,
+        "g": 98,
+        "b": 173
+    },
+    {
+        "name": "usuhanada",
+        "r": 80,
+        "g": 126,
+        "b": 164
+    },
+    {
+        "name": "usuhanazakura",
+        "r": 90,
+        "g": 121,
+        "b": 186
+    },
+    {
+        "name": "usugunjou",
+        "r": 83,
+        "g": 131,
+        "b": 195
+    },
+    {
+        "name": "hanadairo",
+        "r": 39,
+        "g": 146,
+        "b": 195
+    },
+    {
+        "name": "usuai",
+        "r": 0,
+        "g": 148,
+        "b": 200
+    },
+    {
+        "name": "ao",
+        "r": 0,
+        "g": 149,
+        "b": 217
+    },
+    {
+        "name": "asagiiro",
+        "r": 0,
+        "g": 163,
+        "b": 175
+    },
+    {
+        "name": "aomidori",
+        "r": 0,
+        "g": 164,
+        "b": 151
+    },
+    {
+        "name": "hanarokushou",
+        "r": 0,
+        "g": 163,
+        "b": 129
+    },
+    {
+        "name": "nandoiro",
+        "r": 0,
+        "g": 136,
+        "b": 153
+    },
+    {
+        "name": "konpeki",
+        "r": 0,
+        "g": 123,
+        "b": 187
+    },
+    {
+        "name": "hanaasagi",
+        "r": 42,
+        "g": 131,
+        "b": 162
+    },
+    {
+        "name": "ruriiro",
+        "r": 30,
+        "g": 80,
+        "b": 162
+    },
+    {
+        "name": "rurikon",
+        "r": 25,
+        "g": 68,
+        "b": 142
+    },
+    {
+        "name": "konruri",
+        "r": 22,
+        "g": 74,
+        "b": 132
+    },
+    {
+        "name": "aiiro",
+        "r": 22,
+        "g": 94,
+        "b": 131
+    },
+    {
+        "name": "seiran",
+        "r": 39,
+        "g": 74,
+        "b": 120
+    },
+    {
+        "name": "kokihanada",
+        "r": 42,
+        "g": 64,
+        "b": 115
+    },
+    {
+        "name": "kon'iro",
+        "r": 34,
+        "g": 58,
+        "b": 112
+    },
+    {
+        "name": "konjou",
+        "r": 25,
+        "g": 47,
+        "b": 96
+    },
+    {
+        "name": "tomekon",
+        "r": 28,
+        "g": 48,
+        "b": 92
+    },
+    {
+        "name": "kachikaeshi",
+        "r": 32,
+        "g": 55,
+        "b": 68
+    },
+    {
+        "name": "momoshiocha",
+        "r": 31,
+        "g": 49,
+        "b": 52
+    },
+    {
+        "name": "kurobeni",
+        "r": 48,
+        "g": 40,
+        "b": 51
+    },
+    {
+        "name": "shikoku",
+        "r": 46,
+        "g": 41,
+        "b": 48
+    },
+    {
+        "name": "rouiro",
+        "r": 43,
+        "g": 43,
+        "b": 43
+    },
+    {
+        "name": "kuro",
+        "r": 43,
+        "g": 43,
+        "b": 43
+    },
+    {
+        "name": "kuromidori",
+        "r": 51,
+        "g": 54,
+        "b": 49
+    },
+    {
+        "name": "akasumi",
+        "r": 63,
+        "g": 49,
+        "b": 43
+    },
+    {
+        "name": "kurotobi",
+        "r": 67,
+        "g": 47,
+        "b": 47
+    },
+    {
+        "name": "kurocha",
+        "r": 88,
+        "g": 56,
+        "b": 34
+    },
+    {
+        "name": "sabiiro",
+        "r": 108,
+        "g": 53,
+        "b": 36
+    },
+    {
+        "name": "ebicha",
+        "r": 108,
+        "g": 44,
+        "b": 47
+    },
+    {
+        "name": "karacha",
+        "r": 120,
+        "g": 60,
+        "b": 29
+    },
+    {
+        "name": "akasabiiro",
+        "r": 138,
+        "g": 51,
+        "b": 25
+    },
+    {
+        "name": "kuriume",
+        "r": 133,
+        "g": 46,
+        "b": 25
+    },
+    {
+        "name": "bengarairo",
+        "r": 143,
+        "g": 46,
+        "b": 20
+    },
+    {
+        "name": "kasshoku",
+        "r": 138,
+        "g": 59,
+        "b": 0
+    },
+    {
+        "name": "kuriiro",
+        "r": 118,
+        "g": 47,
+        "b": 7
+    },
+    {
+        "name": "shakudouiro",
+        "r": 117,
+        "g": 33,
+        "b": 0
+    },
+    {
+        "name": "ebiiro",
+        "r": 100,
+        "g": 1,
+        "b": 37
+    },
+    {
+        "name": "shikon",
+        "r": 70,
+        "g": 14,
+        "b": 68
+    },
+    {
+        "name": "tetsukon",
+        "r": 23,
+        "g": 24,
+        "b": 75
+    },
+    {
+        "name": "koiai",
+        "r": 15,
+        "g": 35,
+        "b": 80
+    },
+    {
+        "name": "tetsuiro",
+        "r": 0,
+        "g": 82,
+        "b": 67
+    },
+    {
+        "name": "fukamidori",
+        "r": 0,
+        "g": 85,
+        "b": 46
+    },
+    {
+        "name": "tokiwairo",
+        "r": 0,
+        "g": 123,
+        "b": 67
+    },
+    {
+        "name": "moegiiro",
+        "r": 0,
+        "g": 110,
+        "b": 84
+    },
+    {
+        "name": "tokiwamidori",
+        "r": 2,
+        "g": 135,
+        "b": 96
+    },
+    {
+        "name": "tokusairo",
+        "r": 59,
+        "g": 121,
+        "b": 96
+    },
+    {
+        "name": "rokushouiro",
+        "r": 71,
+        "g": 136,
+        "b": 94
+    },
+    {
+        "name": "oitakeiro",
+        "r": 118,
+        "g": 145,
+        "b": 100
+    },
+    {
+        "name": "yamabatoiro",
+        "r": 118,
+        "g": 124,
+        "b": 107
+    },
+    {
+        "name": "aonibi",
+        "r": 107,
+        "g": 123,
+        "b": 110
+    },
+    {
+        "name": "nibiiro",
+        "r": 114,
+        "g": 113,
+        "b": 113
+    },
+    {
+        "name": "murasakinezu",
+        "r": 113,
+        "g": 104,
+        "b": 108
+    },
+    {
+        "name": "budounezumi",
+        "r": 112,
+        "g": 91,
+        "b": 103
+    },
+    {
+        "name": "iwaicha",
+        "r": 107,
+        "g": 111,
+        "b": 89
+    },
+    {
+        "name": "kikujin",
+        "r": 110,
+        "g": 121,
+        "b": 85
+    },
+    {
+        "name": "higosusutake",
+        "r": 137,
+        "g": 120,
+        "b": 88
+    },
+    {
+        "name": "ginsusudake",
+        "r": 133,
+        "g": 104,
+        "b": 89
+    },
+    {
+        "name": "senchairo",
+        "r": 140,
+        "g": 100,
+        "b": 80
+    },
+    {
+        "name": "karacha",
+        "r": 141,
+        "g": 100,
+        "b": 73
+    },
+    {
+        "name": "shibukamiiro",
+        "r": 148,
+        "g": 98,
+        "b": 67
+    },
+    {
+        "name": "haicha",
+        "r": 152,
+        "g": 98,
+        "b": 60
+    },
+    {
+        "name": "rokoucha",
+        "r": 140,
+        "g": 112,
+        "b": 66
+    },
+    {
+        "name": "kuchibairo",
+        "r": 145,
+        "g": 115,
+        "b": 71
+    },
+    {
+        "name": "baikoucha",
+        "r": 136,
+        "g": 121,
+        "b": 56
+    },
+    {
+        "name": "uguisuiro",
+        "r": 146,
+        "g": 140,
+        "b": 54
+    },
+    {
+        "name": "negishiiro",
+        "r": 147,
+        "g": 139,
+        "b": 75
+    },
+    {
+        "name": "kimirucha",
+        "r": 145,
+        "g": 135,
+        "b": 84
+    },
+    {
+        "name": "hiwacha",
+        "r": 140,
+        "g": 136,
+        "b": 97
+    },
+    {
+        "name": "rikyuuiro",
+        "r": 143,
+        "g": 134,
+        "b": 103
+    },
+    {
+        "name": "namakabeiro",
+        "r": 148,
+        "g": 132,
+        "b": 106
+    },
+    {
+        "name": "utsubushiiro",
+        "r": 157,
+        "g": 137,
+        "b": 108
+    },
+    {
+        "name": "akuiro",
+        "r": 158,
+        "g": 148,
+        "b": 120
+    },
+    {
+        "name": "kurumizome",
+        "r": 165,
+        "g": 143,
+        "b": 134
+    },
+    {
+        "name": "hatobanezumi",
+        "r": 158,
+        "g": 139,
+        "b": 142
+    },
+    {
+        "name": "nezumiiro",
+        "r": 148,
+        "g": 148,
+        "b": 149
+    },
+    {
+        "name": "kikyounezu",
+        "r": 149,
+        "g": 148,
+        "b": 154
+    },
+    {
+        "name": "usunezu",
+        "r": 151,
+        "g": 144,
+        "b": 164
+    },
+    {
+        "name": "hatobairo",
+        "r": 149,
+        "g": 133,
+        "b": 156
+    },
+    {
+        "name": "rindouiro",
+        "r": 144,
+        "g": 121,
+        "b": 173
+    },
+    {
+        "name": "shion'iro",
+        "r": 134,
+        "g": 123,
+        "b": 169
+    },
+    {
+        "name": "genjinezu",
+        "r": 136,
+        "g": 128,
+        "b": 132
+    },
+    {
+        "name": "susuiro",
+        "r": 136,
+        "g": 127,
+        "b": 122
+    },
+    {
+        "name": "edonezu",
+        "r": 146,
+        "g": 129,
+        "b": 120
+    },
+    {
+        "name": "rikyuunezumi",
+        "r": 136,
+        "g": 142,
+        "b": 126
+    },
+    {
+        "name": "mamegaracha",
+        "r": 139,
+        "g": 150,
+        "b": 141
+    },
+    {
+        "name": "minatonezumi",
+        "r": 128,
+        "g": 152,
+        "b": 155
+    },
+    {
+        "name": "mizuasagi",
+        "r": 128,
+        "g": 171,
+        "b": 169
+    },
+    {
+        "name": "aotakeiro",
+        "r": 126,
+        "g": 190,
+        "b": 171
+    },
+    {
+        "name": "seijiiro",
+        "r": 126,
+        "g": 190,
+        "b": 165
+    },
+    {
+        "name": "chigusairo",
+        "r": 146,
+        "g": 181,
+        "b": 169
+    },
+    {
+        "name": "usuao",
+        "r": 147,
+        "g": 182,
+        "b": 156
+    },
+    {
+        "name": "yanagizome",
+        "r": 147,
+        "g": 184,
+        "b": 129
+    },
+    {
+        "name": "usumoegi",
+        "r": 147,
+        "g": 202,
+        "b": 118
+    },
+    {
+        "name": "asamidori",
+        "r": 136,
+        "g": 203,
+        "b": 127
+    },
+    {
+        "name": "yanagiiro",
+        "r": 168,
+        "g": 201,
+        "b": 127
+    },
+    {
+        "name": "naeiro",
+        "r": 176,
+        "g": 202,
+        "b": 113
+    },
+    {
+        "name": "matchairo",
+        "r": 197,
+        "g": 197,
+        "b": 106
+    },
+    {
+        "name": "mokuranjiki",
+        "r": 199,
+        "g": 179,
+        "b": 112
+    },
+    {
+        "name": "hashibamiiro",
+        "r": 191,
+        "g": 164,
+        "b": 111
+    },
+    {
+        "name": "kyarairo",
+        "r": 216,
+        "g": 163,
+        "b": 115
+    },
+    {
+        "name": "ameiro",
+        "r": 222,
+        "g": 176,
+        "b": 104
+    },
+    {
+        "name": "komugiiro",
+        "r": 228,
+        "g": 158,
+        "b": 97
+    },
+    {
+        "name": "kokikuchinashi",
+        "r": 235,
+        "g": 155,
+        "b": 111
+    },
+    {
+        "name": "shinonomeiro",
+        "r": 241,
+        "g": 144,
+        "b": 114
+    },
+    {
+        "name": "akebonoiro",
+        "r": 241,
+        "g": 144,
+        "b": 114
+    },
+    {
+        "name": "sangoshuiro",
+        "r": 238,
+        "g": 131,
+        "b": 111
+    },
+    {
+        "name": "jinzamomi",
+        "r": 238,
+        "g": 130,
+        "b": 124
+    },
+    {
+        "name": "usubeni",
+        "r": 240,
+        "g": 144,
+        "b": 141
+    },
+    {
+        "name": "momoiro",
+        "r": 240,
+        "g": 145,
+        "b": 153
+    },
+    {
+        "name": "koubaiiro",
+        "r": 242,
+        "g": 160,
+        "b": 161
+    },
+    {
+        "name": "ikkonzome",
+        "r": 245,
+        "g": 177,
+        "b": 153
+    },
+    {
+        "name": "akakou",
+        "r": 246,
+        "g": 184,
+        "b": 148
+    },
+    {
+        "name": "sharegaki",
+        "r": 247,
+        "g": 189,
+        "b": 143
+    },
+    {
+        "name": "usukou",
+        "r": 243,
+        "g": 191,
+        "b": 136
+    },
+    {
+        "name": "nikuiro",
+        "r": 241,
+        "g": 191,
+        "b": 153
+    },
+    {
+        "name": "hitoiro",
+        "r": 241,
+        "g": 191,
+        "b": 153
+    },
+    {
+        "name": "choujiiro",
+        "r": 239,
+        "g": 205,
+        "b": 154
+    },
+    {
+        "name": "kouiro",
+        "r": 239,
+        "g": 205,
+        "b": 154
+    },
+    {
+        "name": "usukou",
+        "r": 240,
+        "g": 207,
+        "b": 160
+    },
+    {
+        "name": "usuki",
+        "r": 237,
+        "g": 211,
+        "b": 161
+    },
+    {
+        "name": "tonokoiro",
+        "r": 244,
+        "g": 221,
+        "b": 165
+    },
+    {
+        "name": "hachimitsuiro",
+        "r": 253,
+        "g": 222,
+        "b": 165
+    },
+    {
+        "name": "mushiguriiro",
+        "r": 235,
+        "g": 225,
+        "b": 169
+    },
+    {
+        "name": "wakameiro",
+        "r": 224,
+        "g": 235,
+        "b": 175
+    },
+    {
+        "name": "natsumushiiro",
+        "r": 206,
+        "g": 228,
+        "b": 174
+    },
+    {
+        "name": "urahayanagi",
+        "r": 193,
+        "g": 216,
+        "b": 172
+    },
+    {
+        "name": "usumoegi",
+        "r": 186,
+        "g": 220,
+        "b": 173
+    },
+    {
+        "name": "yanaginezu",
+        "r": 200,
+        "g": 213,
+        "b": 187
+    },
+    {
+        "name": "seijinezu",
+        "r": 190,
+        "g": 210,
+        "b": 195
+    },
+    {
+        "name": "chigusanezu",
+        "r": 190,
+        "g": 211,
+        "b": 202
+    },
+    {
+        "name": "haiao",
+        "r": 192,
+        "g": 198,
+        "b": 201
+    },
+    {
+        "name": "kasumiiro",
+        "r": 200,
+        "g": 194,
+        "b": 198
+    },
+    {
+        "name": "urumiiro",
+        "r": 200,
+        "g": 194,
+        "b": 190
+    },
+    {
+        "name": "karenoiro",
+        "r": 211,
+        "g": 203,
+        "b": 198
+    },
+    {
+        "name": "botannezu",
+        "r": 211,
+        "g": 204,
+        "b": 214
+    },
+    {
+        "name": "akatsukinezu",
+        "r": 211,
+        "g": 207,
+        "b": 217
+    },
+    {
+        "name": "usukumonezu",
+        "r": 212,
+        "g": 220,
+        "b": 218
+    },
+    {
+        "name": "sobakiriiro",
+        "r": 212,
+        "g": 220,
+        "b": 214
+    },
+    {
+        "name": "kinunezu",
+        "r": 221,
+        "g": 220,
+        "b": 214
+    },
+    {
+        "name": "shironezu",
+        "r": 220,
+        "g": 221,
+        "b": 221
+    },
+    {
+        "name": "usuumenezu",
+        "r": 220,
+        "g": 214,
+        "b": 217
+    },
+    {
+        "name": "tokinezu",
+        "r": 228,
+        "g": 210,
+        "b": 216
+    },
+    {
+        "name": "haizakura",
+        "r": 232,
+        "g": 211,
+        "b": 209
+    },
+    {
+        "name": "haiume",
+        "r": 232,
+        "g": 211,
+        "b": 199
+    },
+    {
+        "name": "neriiro",
+        "r": 237,
+        "g": 228,
+        "b": 205
+    },
+    {
+        "name": "kaihakushoku",
+        "r": 233,
+        "g": 228,
+        "b": 212
+    },
+    {
+        "name": "soshoku",
+        "r": 234,
+        "g": 229,
+        "b": 227
+    },
+    {
+        "name": "sakuranezu",
+        "r": 233,
+        "g": 223,
+        "b": 229
+    },
+    {
+        "name": "shiraumenezu",
+        "r": 229,
+        "g": 228,
+        "b": 230
+    },
+    {
+        "name": "murasakisuishou",
+        "r": 231,
+        "g": 231,
+        "b": 235
+    },
+    {
+        "name": "shirahanairo",
+        "r": 232,
+        "g": 236,
+        "b": 239
+    },
+    {
+        "name": "shirosumireiro",
+        "r": 234,
+        "g": 237,
+        "b": 247
+    },
+    {
+        "name": "aijiro",
+        "r": 235,
+        "g": 246,
+        "b": 247
+    },
+    {
+        "name": "geppaku",
+        "r": 234,
+        "g": 244,
+        "b": 252
+    },
+    {
+        "name": "nyuuhakushoku",
+        "r": 243,
+        "g": 243,
+        "b": 243
+    },
+    {
+        "name": "shironeri",
+        "r": 243,
+        "g": 243,
+        "b": 242
+    },
+    {
+        "name": "sakurairo",
+        "r": 254,
+        "g": 244,
+        "b": 244
+    },
+    {
+        "name": "usuzakura",
+        "r": 253,
+        "g": 239,
+        "b": 242
+    },
+    {
+        "name": "kinariiro",
+        "r": 251,
+        "g": 250,
+        "b": 245
+    },
+    {
+        "name": "hakuji",
+        "r": 248,
+        "g": 251,
+        "b": 248
+    },
+    {
+        "name": "unohanairo",
+        "r": 247,
+        "g": 252,
+        "b": 254
+    },
+    {
+        "name": "shiro",
+        "r": 255,
+        "g": 255,
+        "b": 255
+    },
+    {
+        "name": "gofun'iro",
+        "r": 255,
+        "g": 255,
+        "b": 252
+    },
+    {
+        "name": "zougeiro",
+        "r": 248,
+        "g": 244,
+        "b": 230
+    },
+    {
+        "name": "haikimidori",
+        "r": 230,
+        "g": 234,
+        "b": 227
+    },
+    {
+        "name": "awabenifuji",
+        "r": 230,
+        "g": 205,
+        "b": 227
+    },
+    {
+        "name": "shirafujiiro",
+        "r": 219,
+        "g": 208,
+        "b": 230
+    },
+    {
+        "name": "awafujiiro",
+        "r": 187,
+        "g": 200,
+        "b": 230
+    },
+    {
+        "name": "fujiiro",
+        "r": 187,
+        "g": 188,
+        "b": 222
+    },
+    {
+        "name": "hisokuiro",
+        "r": 171,
+        "g": 206,
+        "b": 216
+    },
+    {
+        "name": "kamenozoki",
+        "r": 162,
+        "g": 215,
+        "b": 221
+    },
+    {
+        "name": "sorairo",
+        "r": 160,
+        "g": 216,
+        "b": 239
+    },
+    {
+        "name": "mizuiro",
+        "r": 188,
+        "g": 226,
+        "b": 232
+    },
+    {
+        "name": "shiraai",
+        "r": 193,
+        "g": 228,
+        "b": 233
+    },
+    {
+        "name": "byakuroku",
+        "r": 214,
+        "g": 233,
+        "b": 202
+    },
+    {
+        "name": "usutamagoiro",
+        "r": 253,
+        "g": 232,
+        "b": 208
+    },
+    {
+        "name": "torinokoiro",
+        "r": 255,
+        "g": 241,
+        "b": 207
+    },
+    {
+        "name": "hadairo",
+        "r": 252,
+        "g": 226,
+        "b": 196
+    },
+    {
+        "name": "ominaeshi",
+        "r": 242,
+        "g": 242,
+        "b": 176
+    },
+    {
+        "name": "araigaki",
+        "r": 242,
+        "g": 201,
+        "b": 172
+    },
+    {
+        "name": "yuuou",
+        "r": 249,
+        "g": 200,
+        "b": 155
+    },
+    {
+        "name": "sangoiro",
+        "r": 245,
+        "g": 177,
+        "b": 170
+    },
+    {
+        "name": "tokiiro",
+        "r": 244,
+        "g": 179,
+        "b": 194
+    },
+    {
+        "name": "nijiiro",
+        "r": 246,
+        "g": 191,
+        "b": 188
+    },
+    {
+        "name": "nadeshikoiro",
+        "r": 238,
+        "g": 187,
+        "b": 203
+    },
+    {
+        "name": "sekichikuiro",
+        "r": 229,
+        "g": 171,
+        "b": 190
+    },
+    {
+        "name": "benifujiiro",
+        "r": 204,
+        "g": 166,
+        "b": 191
+    },
+    {
+        "name": "asamurasaki",
+        "r": 196,
+        "g": 163,
+        "b": 191
+    },
+    {
+        "name": "usubudou",
+        "r": 192,
+        "g": 162,
+        "b": 199
+    },
+    {
+        "name": "fujinezu",
+        "r": 166,
+        "g": 165,
+        "b": 196
+    },
+    {
+        "name": "hashitairo",
+        "r": 166,
+        "g": 154,
+        "b": 189
+    },
+    {
+        "name": "fujimurasaki",
+        "r": 165,
+        "g": 154,
+        "b": 202
+    },
+    {
+        "name": "usuiro",
+        "r": 168,
+        "g": 157,
+        "b": 172
+    },
+    {
+        "name": "usuzumiiro",
+        "r": 163,
+        "g": 163,
+        "b": 162
+    },
+    {
+        "name": "suzuiro",
+        "r": 158,
+        "g": 161,
+        "b": 163
+    },
+    {
+        "name": "sunezumi",
+        "r": 159,
+        "g": 160,
+        "b": 160
+    },
+    {
+        "name": "chanezumi",
+        "r": 169,
+        "g": 158,
+        "b": 147
+    },
+    {
+        "name": "fukagawanezumi",
+        "r": 151,
+        "g": 167,
+        "b": 145
+    },
+    {
+        "name": "aoshirotsurubami",
+        "r": 155,
+        "g": 168,
+        "b": 141
+    },
+    {
+        "name": "yanagicha",
+        "r": 161,
+        "g": 164,
+        "b": 109
+    },
+    {
+        "name": "rikyuucha",
+        "r": 165,
+        "g": 149,
+        "b": 100
+    },
+    {
+        "name": "aburairo",
+        "r": 161,
+        "g": 147,
+        "b": 97
+    },
+    {
+        "name": "kuwazome",
+        "r": 183,
+        "g": 155,
+        "b": 91
+    },
+    {
+        "name": "aokuchiba",
+        "r": 173,
+        "g": 162,
+        "b": 80
+    },
+    {
+        "name": "aoni",
+        "r": 153,
+        "g": 171,
+        "b": 78
+    },
+    {
+        "name": "hiwamoegi",
+        "r": 130,
+        "g": 174,
+        "b": 70
+    },
+    {
+        "name": "matsubairo",
+        "r": 131,
+        "g": 155,
+        "b": 92
+    },
+    {
+        "name": "kusairo",
+        "r": 123,
+        "g": 141,
+        "b": 66
+    },
+    {
+        "name": "kokuboushoku",
+        "r": 123,
+        "g": 108,
+        "b": 62
+    },
+    {
+        "name": "miruiro",
+        "r": 114,
+        "g": 109,
+        "b": 64
+    },
+    {
+        "name": "uguisucha",
+        "r": 113,
+        "g": 92,
+        "b": 31
+    },
+    {
+        "name": "rikancha",
+        "r": 106,
+        "g": 93,
+        "b": 33
+    },
+    {
+        "name": "kokeiro",
+        "r": 105,
+        "g": 130,
+        "b": 27
+    },
+    {
+        "name": "kuwacha",
+        "r": 149,
+        "g": 111,
+        "b": 41
+    },
+    {
+        "name": "kakicha",
+        "r": 149,
+        "g": 78,
+        "b": 42
+    },
+    {
+        "name": "taisha",
+        "r": 187,
+        "g": 85,
+        "b": 32
+    },
+    {
+        "name": "hiiro",
+        "r": 211,
+        "g": 56,
+        "b": 28
+    },
+    {
+        "name": "benihi",
+        "r": 232,
+        "g": 57,
+        "b": 41
+    },
+    {
+        "name": "beniaka",
+        "r": 217,
+        "g": 51,
+        "b": 63
+    },
+    {
+        "name": "kurenai",
+        "r": 215,
+        "g": 0,
+        "b": 58
+    },
+    {
+        "name": "aka",
+        "r": 230,
+        "g": 0,
+        "b": 51
+    },
+    {
+        "name": "shoujouhi",
+        "r": 226,
+        "g": 4,
+        "b": 27
+    },
+    {
+        "name": "kokihi",
+        "r": 201,
+        "g": 23,
+        "b": 30
+    },
+    {
+        "name": "akadaidai",
+        "r": 234,
+        "g": 85,
+        "b": 6
+    },
+    {
+        "name": "kin'aka",
+        "r": 234,
+        "g": 85,
+        "b": 6
+    },
+    {
+        "name": "shuiro",
+        "r": 235,
+        "g": 97,
+        "b": 1
+    },
+    {
+        "name": "kiaka",
+        "r": 236,
+        "g": 104,
+        "b": 0
+    },
+    {
+        "name": "ninjin'iro",
+        "r": 236,
+        "g": 104,
+        "b": 0
+    },
+    {
+        "name": "daidaiiro",
+        "r": 238,
+        "g": 120,
+        "b": 0
+    },
+    {
+        "name": "mikan'iro",
+        "r": 240,
+        "g": 131,
+        "b": 0
+    },
+    {
+        "name": "kincha",
+        "r": 243,
+        "g": 152,
+        "b": 0
+    },
+    {
+        "name": "yamabukiiro",
+        "r": 248,
+        "g": 181,
+        "b": 0
+    },
+    {
+        "name": "himawariiro",
+        "r": 252,
+        "g": 200,
+        "b": 0
+    },
+    {
+        "name": "tanpopoiro",
+        "r": 255,
+        "g": 217,
+        "b": 0
+    },
+    {
+        "name": "kiiro",
+        "r": 255,
+        "g": 217,
+        "b": 0
+    },
+    {
+        "name": "chuuki",
+        "r": 255,
+        "g": 234,
+        "b": 0
+    },
+    {
+        "name": "ukon'iro",
+        "r": 250,
+        "g": 191,
+        "b": 20
+    },
+    {
+        "name": "touou",
+        "r": 247,
+        "g": 193,
+        "b": 20
+    },
+    {
+        "name": "ryokuoushoku",
+        "r": 220,
+        "g": 203,
+        "b": 24
+    },
+    {
+        "name": "kogane",
+        "r": 230,
+        "g": 180,
+        "b": 34
+    },
+    {
+        "name": "konjiki",
+        "r": 230,
+        "g": 180,
+        "b": 34
+    },
+    {
+        "name": "hajizome",
+        "r": 217,
+        "g": 166,
+        "b": 46
+    },
+    {
+        "name": "kikuchibairo",
+        "r": 211,
+        "g": 162,
+        "b": 67
+    },
+    {
+        "name": "karashiiro",
+        "r": 208,
+        "g": 175,
+        "b": 76
+    },
+    {
+        "name": "koujiiro",
+        "r": 246,
+        "g": 173,
+        "b": 73
+    },
+    {
+        "name": "kanzouiro",
+        "r": 248,
+        "g": 184,
+        "b": 98
+    },
+    {
+        "name": "toumorokoshiiro",
+        "r": 238,
+        "g": 195,
+        "b": 98
+    },
+    {
+        "name": "hanabairo",
+        "r": 251,
+        "g": 210,
+        "b": 107
+    },
+    {
+        "name": "tamagoiro",
+        "r": 252,
+        "g": 213,
+        "b": 117
+    },
+    {
+        "name": "kariyasuiro",
+        "r": 245,
+        "g": 229,
+        "b": 107
+    },
+    {
+        "name": "kihadairo",
+        "r": 254,
+        "g": 242,
+        "b": 99
+    },
+    {
+        "name": "nanohanairo",
+        "r": 255,
+        "g": 236,
+        "b": 71
+    },
+    {
+        "name": "kikuchinashiiro",
+        "r": 255,
+        "g": 219,
+        "b": 79
+    },
+    {
+        "name": "kuchinashiiro",
+        "r": 251,
+        "g": 202,
+        "b": 77
+    },
+    {
+        "name": "kanariairo",
+        "r": 235,
+        "g": 216,
+        "b": 66
+    },
+    {
+        "name": "hiwairo",
+        "r": 215,
+        "g": 207,
+        "b": 58
+    },
+    {
+        "name": "wakakusairo",
+        "r": 195,
+        "g": 216,
+        "b": 37
+    },
+    {
+        "name": "kimidori",
+        "r": 184,
+        "g": 210,
+        "b": 0
+    },
+    {
+        "name": "moegi",
+        "r": 170,
+        "g": 207,
+        "b": 83
+    },
+    {
+        "name": "wakanaeiro",
+        "r": 199,
+        "g": 220,
+        "b": 104
+    },
+    {
+        "name": "wakabairo",
+        "r": 185,
+        "g": 208,
+        "b": 139
+    },
+    {
+        "name": "wasabiiro",
+        "r": 168,
+        "g": 191,
+        "b": 147
+    },
+    {
+        "name": "shirotsurubami",
+        "r": 203,
+        "g": 185,
+        "b": 148
+    },
+    {
+        "name": "shiracha",
+        "r": 221,
+        "g": 187,
+        "b": 153
+    },
+    {
+        "name": "kareiro",
+        "r": 224,
+        "g": 195,
+        "b": 140
+    },
+    {
+        "name": "karekusairo",
+        "r": 228,
+        "g": 220,
+        "b": 138
+    },
+    {
+        "name": "tankou",
+        "r": 248,
+        "g": 229,
+        "b": 140
+    },
+    {
+        "name": "wakanairo",
+        "r": 216,
+        "g": 230,
+        "b": 152
+    },
+    {
+        "name": "sunairo",
+        "r": 220,
+        "g": 211,
+        "b": 178
+    },
+    {
+        "name": "amairo",
+        "r": 214,
+        "g": 198,
+        "b": 175
+    },
+    {
+        "name": "usugaki",
+        "r": 212,
+        "g": 172,
+        "b": 173
+    },
+    {
+        "name": "mizugaki",
+        "r": 228,
+        "g": 171,
+        "b": 155
+    },
+    {
+        "name": "shishiiro",
+        "r": 239,
+        "g": 171,
+        "b": 147
+    },
+    {
+        "name": "akashirotsurubami",
+        "r": 215,
+        "g": 169,
+        "b": 140
+    },
+    {
+        "name": "tokigaracha",
+        "r": 224,
+        "g": 158,
+        "b": 135
+    },
+    {
+        "name": "arazome",
+        "r": 214,
+        "g": 144,
+        "b": 144
+    },
+    {
+        "name": "umenezu",
+        "r": 192,
+        "g": 153,
+        "b": 160
+    },
+    {
+        "name": "rikyuushirocha",
+        "r": 179,
+        "g": 173,
+        "b": 160
+    },
+    {
+        "name": "usunibi",
+        "r": 173,
+        "g": 173,
+        "b": 173
+    },
+    {
+        "name": "ginnezu",
+        "r": 175,
+        "g": 175,
+        "b": 176
+    },
+    {
+        "name": "sabiseiji",
+        "r": 166,
+        "g": 200,
+        "b": 178
+    },
+    {
+        "name": "wakamidori",
+        "r": 152,
+        "g": 217,
+        "b": 142
+    },
+    {
+        "name": "wakatakeiro",
+        "r": 104,
+        "g": 190,
+        "b": 141
+    },
+    {
+        "name": "usumidori",
+        "r": 105,
+        "g": 176,
+        "b": 118
+    },
+    {
+        "name": "midori",
+        "r": 62,
+        "g": 179,
+        "b": 112
+    },
+    {
+        "name": "hisuiiro",
+        "r": 56,
+        "g": 180,
+        "b": 139
+    },
+    {
+        "name": "shinbashiiro",
+        "r": 89,
+        "g": 185,
+        "b": 198
+    },
+    {
+        "name": "asahanada",
+        "r": 132,
+        "g": 185,
+        "b": 203
+    },
+    {
+        "name": "byakugun",
+        "r": 131,
+        "g": 204,
+        "b": 210
+    },
+    {
+        "name": "wasurenagusairo",
+        "r": 137,
+        "g": 195,
+        "b": 235
+    },
+    {
+        "name": "aofujiiro",
+        "r": 132,
+        "g": 162,
+        "b": 212
+    },
+    {
+        "name": "benikakesorairo",
+        "r": 132,
+        "g": 145,
+        "b": 195
+    },
+    {
+        "name": "benimidori",
+        "r": 132,
+        "g": 145,
+        "b": 195
+    },
+    {
+        "name": "haiiro",
+        "r": 125,
+        "g": 125,
+        "b": 125
+    },
+    {
+        "name": "namariiro",
+        "r": 123,
+        "g": 124,
+        "b": 125
+    },
+    {
+        "name": "umezome",
+        "r": 180,
+        "g": 138,
+        "b": 118
+    },
+    {
+        "name": "fushizome",
+        "r": 178,
+        "g": 140,
+        "b": 110
+    },
+    {
+        "name": "choujicha",
+        "r": 180,
+        "g": 134,
+        "b": 107
+    },
+    {
+        "name": "enshuucha",
+        "r": 202,
+        "g": 130,
+        "b": 105
+    },
+    {
+        "name": "araishu",
+        "r": 208,
+        "g": 130,
+        "b": 108
+    },
+    {
+        "name": "masoho",
+        "r": 213,
+        "g": 124,
+        "b": 107
+    },
+    {
+        "name": "sohi",
+        "r": 224,
+        "g": 129,
+        "b": 94
+    },
+    {
+        "name": "nikkeiiro",
+        "r": 221,
+        "g": 122,
+        "b": 86
+    },
+    {
+        "name": "usukihi",
+        "r": 223,
+        "g": 113,
+        "b": 99
+    },
+    {
+        "name": "masoo",
+        "r": 236,
+        "g": 109,
+        "b": 113
+    },
+    {
+        "name": "akamurasaki",
+        "r": 235,
+        "g": 110,
+        "b": 165
+    },
+    {
+        "name": "botan'iro",
+        "r": 231,
+        "g": 96,
+        "b": 158
+    },
+    {
+        "name": "tsutsujiiro",
+        "r": 233,
+        "g": 82,
+        "b": 149
+    },
+    {
+        "name": "benimurasaki",
+        "r": 180,
+        "g": 76,
+        "b": 151
+    },
+    {
+        "name": "umemurasaki",
+        "r": 170,
+        "g": 76,
+        "b": 143
+    },
+    {
+        "name": "wakamurasaki",
+        "r": 188,
+        "g": 100,
+        "b": 164
+    },
+    {
+        "name": "ayameiro",
+        "r": 204,
+        "g": 126,
+        "b": 177
+    },
+    {
+        "name": "momohanairo",
+        "r": 225,
+        "g": 152,
+        "b": 180
+    },
+    {
+        "name": "usukoubai",
+        "r": 229,
+        "g": 151,
+        "b": 178
+    },
+    {
+        "name": "choushun'iro",
+        "r": 201,
+        "g": 117,
+        "b": 134
+    },
+    {
+        "name": "tokiasagi",
+        "r": 184,
+        "g": 136,
+        "b": 132
+    },
+    {
+        "name": "edocha",
+        "r": 205,
+        "g": 140,
+        "b": 92
+    },
+    {
+        "name": "yamabukicha",
+        "r": 200,
+        "g": 153,
+        "b": 50
+    },
+    {
+        "name": "nataneyuiro",
+        "r": 166,
+        "g": 148,
+        "b": 37
+    },
+    {
+        "name": "kicha",
+        "r": 225,
+        "g": 123,
+        "b": 52
+    },
+    {
+        "name": "anzuiro",
+        "r": 247,
+        "g": 185,
+        "b": 119
+    },
+    {
+        "name": "tsuyukusairo",
+        "r": 56,
+        "g": 161,
+        "b": 219
+    },
+    {
+        "name": "amairo",
+        "r": 44,
+        "g": 169,
+        "b": 225
+    },
+    {
+        "name": "chitosemidori",
+        "r": 49,
+        "g": 103,
+        "b": 69
+    },
+    {
+        "name": "tetsuguro",
+        "r": 40,
+        "g": 26,
+        "b": 20
+    },
+    {
+        "name": "kenpoukurocha",
+        "r": 36,
+        "g": 26,
+        "b": 8
+    },
+    {
+        "name": "kokutan",
+        "r": 37,
+        "g": 13,
+        "b": 0
+    },
+    {
+        "name": "ankokushoku",
+        "r": 22,
+        "g": 22,
+        "b": 14
+    },
+    {
+        "name": "karasubairo",
+        "r": 24,
+        "g": 6,
+        "b": 20
+    },
+    {
+        "name": "shikkoku",
+        "r": 13,
+        "g": 0,
+        "b": 21
+    },
+    {
+        "name": "nurebairo",
+        "r": 0,
+        "g": 11,
+        "b": 0
+    }
+]

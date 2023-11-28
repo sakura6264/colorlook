@@ -1,0 +1,26 @@
+[package]
+name = "colorlook"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+eframe = {version = "*", default-features = false, features = ["wgpu","accesskit"]}
+serde = { version = "*", features = ["derive"] }
+serde_json = "*"
+simple-message-box = "*"
+rfd = "*"
+image = { version = "*", features = ["png"] }
+rand = "*"
+include-flate = "*"
+lazy_static = "*"
+regex = "*"
+
+[build-dependencies]
+embed-resource = "*"
+
+[profile.release]
+strip = true
+lto = true
+panic = "abort"

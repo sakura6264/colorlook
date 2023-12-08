@@ -1,4 +1,3 @@
-
 use eframe::egui;
 
 use crate::color_item;
@@ -8,33 +7,54 @@ const TEXTURE_NAME: &str = "bufferimg";
 
 include_flate::flate!(static BUFFER: [u8] from "assets/placeholder.png");
 
-
-pub enum Tool {
-    Add(Box<dyn crate::add::AddColor>),
-    Gen(Box<dyn crate::gen::Generate>),
-    None
+lazy_static::lazy_static! {
+    pub static ref PLACEHOLDER: image::DynamicImage = image::load_from_memory(&BUFFER).unwrap();
+    static ref TABLIST: Vec<(Tabs,String)> = vec![
+        (Tabs::Colors, "\u{e22b} Colors".into()),
+        (Tabs::Add, "\u{ea60} Add".into()),
+        (Tabs::Gen, "\u{f0674} Generate".into()),
+        (Tabs::Preview, "\u{f1205} Preview".into()),
+     ];
 }
+
 
 
 pub struct MainWindow {
-    colors: Vec<color_item::ColorItem>,
-    image: image::DynamicImage,
-    texture_id: Option<egui::TextureId>,
-    tool: Tool,
+    toasts: egui_toast::Toasts,
+    file_dialog: FileDialog,
+    tab_viewer: MainWindowTabViewer,
+    dock_tree: egui_dock::DockState<Tabs>,
 }
 
-impl MainWindow {
+pub struct MainWindowTabViewer {
+    pub colors: Vec<color_item::ColorItem>,
+    pub image: image::DynamicImage,
+    texture_id: Option<egui::TextureId>,
+    pub add_component: Option<Box<dyn crate::add::AddColor>>,
+    pub gen_component: Option<Box<dyn crate::gen::Generate>>,
+    pub ui_msg: Option<TabMsg>,
+}
+
+#[derive(Clone, Copy, PartialEq)]
+pub enum Tabs {
+    Colors,
+    Add,
+    Gen,
+    Preview,
+}
+
+impl MainWindowTabViewer {
     pub fn new() -> Self {
-        let placeholder = image::load_from_memory(&BUFFER).unwrap();
 
         return Self {
             colors: Vec::new(),
-            image: placeholder,
+            image: PLACEHOLDER.clone(),
             texture_id: None,
-            tool: Tool::None,
+            add_component: None,
+            gen_component: None,
+            ui_msg: None,
         };
     }
-
     pub fn update_texture(&mut self, ctx: &egui::Context) {
         let manager = ctx.tex_manager();
         if let Some(id) = self.texture_id {
@@ -51,17 +71,113 @@ impl MainWindow {
             egui::TextureOptions::default(),
         ));
     }
+    pub fn ensure_texture(&mut self, ctx: &egui::Context) {
+        if self.texture_id.is_none() {
+            self.update_texture(ctx);
+        }
+    }
 }
 
+impl egui_dock::TabViewer for MainWindowTabViewer {
+    type Tab = Tabs;
+    fn title(&mut self, tab: &mut Self::Tab) -> egui::WidgetText {
+        match tab {
+            Tabs::Colors => "\u{e22b} Colors".into(),
+            Tabs::Add => match &self.add_component {
+                Some(component) => component.get_name().into(),
+                None => "\u{ea60} Add".into(),
+            },
+            Tabs::Gen => match &self.gen_component {
+                Some(component) => component.get_name().into(),
+                None => "\u{f0674} Generate".into(),
+            },
+            Tabs::Preview => "\u{eb28} Preview".into(),
+        }
+    }
 
-#[derive(Clone,Copy)]
+    fn ui(&mut self, ui: &mut egui::Ui, tab: &mut Self::Tab) {
+        let size = ui.available_size_before_wrap();
+        let width = size.x;
+        let height = size.y;
+
+        match tab {
+            Tabs::Colors => {
+                ui.vertical(|ui| {
+                    color_item::draw_color_items(ui, &mut self.colors);
+                });
+            },
+            Tabs::Add => {
+                ui.vertical(|ui| match self.add_component {
+                    Some(ref mut component) => {
+                        if let Some(color) = component.paint_ui(ui) {
+                            self.ui_msg = Some(TabMsg::Add(color));
+                        }
+                    },
+                    None => {
+                        ui.label("\u{f08a4} No Component Selected.");
+                    }
+                });
+            },
+            Tabs::Gen => {
+                ui.vertical(|ui| match self.gen_component {
+                    Some(ref mut component) => {
+                        if let Some(img) = component.paint_ui(ui, &self.colors) {
+                            self.ui_msg = Some(TabMsg::Gen(img));
+                        }
+                    },
+                    None => {
+                        ui.label("\u{f08a4} No Component Selected.");
+                    }
+                });
+            },
+            Tabs::Preview => {
+                if let Some(id) = self.texture_id {
+                    ui.add(
+                        egui::Image::from_texture(egui::load::SizedTexture::new(
+                            id,
+                            [self.image.width() as f32, self.image.height() as f32],
+                        ))
+                        .fit_to_exact_size([width - MARGIN, height - MARGIN].into()),
+                    );
+                }
+            }
+        }
+    }
+
+    fn allowed_in_windows(&self, _tab: &mut Self::Tab) -> bool {
+        true
+    }
+}
+
+impl MainWindow {
+    pub fn new() -> Self {
+        let mut tree = egui_dock::DockState::new(vec![Tabs::Preview]);
+        let [_, b] =
+            tree.main_surface_mut()
+                .split_left(egui_dock::NodeIndex::root(), 0.5, vec![Tabs::Add, Tabs::Gen]);
+        let [_, _] = tree
+            .main_surface_mut()
+            .split_left(b, 0.5, vec![Tabs::Colors]);
+
+        return Self {
+            toasts: egui_toast::Toasts::new()
+                .anchor(egui::Align2::LEFT_BOTTOM, (MARGIN, -MARGIN))
+                .direction(egui::Direction::BottomUp),
+            file_dialog: FileDialog::None,
+            tab_viewer: MainWindowTabViewer::new(),
+            dock_tree: tree,
+        };
+    }
+}
+
+#[derive(Clone, Copy)]
 pub enum MsgFile {
     Clear,
     Save,
     Exit,
 }
 
-#[derive(Clone,Copy)]
+#[derive(Clone, Copy)]
 pub enum MsgColor {
     Clear,
     Reverse,
@@ -82,15 +198,28 @@ pub enum Msg {
     Color(MsgColor),
     Add(Vec<color_item::ColorItem>),
     Gen(image::DynamicImage),
+    AdjustTab(Tabs),
 }
 
+#[derive(Clone)]
+pub enum TabMsg {
+    Add(Vec<color_item::ColorItem>),
+    Gen(image::DynamicImage),
+}
+
+pub enum FileDialog {
+    None,
+    SaveImg(egui_file::FileDialog),
+    ExportJson(egui_file::FileDialog),
+    ImportJson(egui_file::FileDialog),
+}
 impl eframe::App for MainWindow {
     fn update(&mut self, ctx: &egui::Context, _frame: &mut eframe::Frame) {
-        if self.texture_id.is_none() {
-            self.update_texture(ctx);
-        }
+        // call once at the first frame
+        self.tab_viewer.ensure_texture(ctx);
         let height = ctx.available_rect().height();
         let width = ctx.available_rect().width();
+        // manage message. No One can click 2 buttons in one frame.
         let mut ui_msg = None;
         //register shortcut
         let saveshortcut = egui::KeyboardShortcut::new(egui::Modifiers::CTRL, egui::Key::S);
@@ -111,13 +240,22 @@ impl eframe::App for MainWindow {
         egui::CentralPanel::default().show(ctx, |ui| {
             egui::menu::bar(ui, |ui| {
                 ui.menu_button("\u{f0214} File", |ui| {
-                    if ui.add(egui::Button::new("\u{f1604} Clear").shortcut_text(saveshortcuttext)).clicked() {
+                    if ui
+                        .add(egui::Button::new("\u{f1604} Clear").shortcut_text(saveshortcuttext))
+                        .clicked()
+                    {
                         ui_msg = Some(Msg::File(MsgFile::Clear));
                     }
-                    if ui.add(egui::Button::new("\u{f0193} Save").shortcut_text(clearshortcuttext)).clicked() {
+                    if ui
+                        .add(egui::Button::new("\u{f0193} Save").shortcut_text(clearshortcuttext))
+                        .clicked()
+                    {
                         ui_msg = Some(Msg::File(MsgFile::Save));
                     }
-                    if ui.add(egui::Button::new("\u{f05fc} Exit").shortcut_text(exitshortcuttext)).clicked() {
+                    if ui
+                        .add(egui::Button::new("\u{f05fc} Exit").shortcut_text(exitshortcuttext))
+                        .clicked()
+                    {
                         ui_msg = Some(Msg::File(MsgFile::Exit));
                     }
                 });
@@ -156,114 +294,172 @@ impl eframe::App for MainWindow {
                         ui_msg = Some(Msg::Color(MsgColor::Export));
                     }
                 });
+                ui.menu_button("\u{eae4} Window", |ui| {
+                    let getlabel = |tab, text| {
+                        if self.dock_tree.find_tab(tab).is_some() {
+                            return egui::RichText::new(text).color(egui::Color32::YELLOW);
+                        } else {
+                            return egui::RichText::new(text);
+                        }
+                    };
+                    for (tab, text) in TABLIST.iter() {
+                        if ui.button(getlabel(tab,text)).clicked() {
+                            ui_msg = Some(Msg::AdjustTab(tab.clone()));
+                        }
+                    }
+                });
                 ui.menu_button("\u{ea60} Add", |ui| {
-                    for (name,component) in crate::add::NAMELIST.iter() {
+                    for (name, component) in crate::add::NAMELIST.iter() {
                         if ui.button(name).clicked() {
-                            self.tool = Tool::Add(crate::add::get_component(component.clone()));
+                            self.tab_viewer.add_component =
+                                Some(crate::add::get_component(component.clone()));
                         }
                     }
                 });
                 ui.menu_button("\u{f0674} Generate", |ui| {
-                    for (name,component) in crate::gen::NAMELIST.iter() {
+                    for (name, component) in crate::gen::NAMELIST.iter() {
                         if ui.button(name).clicked() {
-                            self.tool = Tool::Gen(crate::gen::get_component(component.clone()));
+                            self.tab_viewer.gen_component =
+                                Some(crate::gen::get_component(component.clone()));
                         }
                     }
                 });
             });
-            ui.horizontal(|ui| {
-                let mut cursor = ui.cursor();
-                cursor.set_height(height - MARGIN);
-                cursor.set_width(width / 4f32);
-                ui.allocate_ui_at_rect(cursor, |ui| {
-                    egui::ScrollArea::new([true, true])
-                        .scroll_bar_visibility(
-                            egui::containers::scroll_area::ScrollBarVisibility::AlwaysVisible,
-                        )
-                        .min_scrolled_height(height - MARGIN)
-                        .id_source("colors")
-                        .show(ui, |ui| {
-                            ui.vertical(|ui| {
-                                let mut size = ui.available_size();
-                                size.y = 10f32;
-                                ui.add_sized(size, egui::widgets::Label::new("\u{e22b} Colors"));
-                                color_item::draw_color_items(ui, &mut self.colors);
+            egui_dock::DockArea::new(&mut self.dock_tree)
+                .style(egui_dock::Style::from_egui(ctx.style().as_ref()))
+                .show_inside(ui, &mut self.tab_viewer);
+        });
+        match &mut self.tab_viewer.ui_msg {
+            Some(msg) => {
+                match msg {
+                    TabMsg::Add(color) => {
+                        ui_msg = Some(Msg::Add(color.clone()));
+                    }
+                    TabMsg::Gen(img) => {
+                        ui_msg = Some(Msg::Gen(img.clone()));
+                    },
+                }
+                self.tab_viewer.ui_msg = None;
+            }
+            None => {}
+        }
+        self.toasts.show(ctx);
+        match &mut self.file_dialog {
+            FileDialog::SaveImg(dlg) => {
+                if dlg.show(ctx).selected() {
+                    if let Some(path) = dlg.path() {
+                        if let Err(e) = self.tab_viewer.image.save(path) {
+                            self.toasts.add(egui_toast::Toast {
+                                kind: egui_toast::ToastKind::Error,
+                                text: format!("Error: {}", e).into(),
+                                options: egui_toast::ToastOptions::default()
+                                    .duration_in_seconds(5f64)
+                                    .show_progress(true),
                             });
-                        });
-                });
-                ui.add_sized(
-                    [MARGIN / 4f32, height - MARGIN],
-                    egui::widgets::Separator::default(),
-                );
-                cursor = ui.cursor();
-                cursor.set_height(height - MARGIN);
-                cursor.set_width(width / 4f32);
-                ui.allocate_ui_at_rect(cursor, |ui| {
-                    egui::ScrollArea::vertical()
-                        .min_scrolled_height(height - MARGIN)
-                        .id_source("tool")
-                        .show(ui, |ui| {
-                            ui.vertical(|ui| {
-                                let mut size = ui.available_size();
-                                size.y = 10f32;
-                                match self.tool {
-                                    Tool::Add(ref mut component) => {
-                                        ui.add_sized(size, egui::widgets::Label::new(component.get_name()));
-                                        if let Some(color) = component.paint_ui(ui) {
-                                            ui_msg = Some(Msg::Add(color));
-                                        }
-                                    },
-                                    Tool::Gen(ref mut component) => {
-                                        ui.add_sized(size, egui::widgets::Label::new(component.get_name()));
-                                        if let Some(img) = component.paint_ui(ui, &self.colors.clone()) {
-                                            ui_msg = Some(Msg::Gen(img));
-                                        }
-                                    },
-                                    Tool::None => {
-                                        ui.add_sized(size, egui::widgets::Label::new("\u{eae6} Welcome"));
+                        } else {
+                            self.toasts.add(egui_toast::Toast {
+                                kind: egui_toast::ToastKind::Success,
+                                text: format!("Saved PNG to {}", path.display()).into(),
+                                options: egui_toast::ToastOptions::default()
+                                    .duration_in_seconds(2f64)
+                                    .show_progress(true),
+                            });
+                        };
+                    }
+                }
+            }
+            FileDialog::ExportJson(dlg) => {
+                if dlg.show(ctx).selected() {
+                    if let Some(path) = dlg.path() {
+                        let mut err = None;
+                        match serde_json::to_string(&self.tab_viewer.colors) {
+                            Ok(str) => match std::fs::write(path, str) {
+                                Ok(_) => {}
+                                Err(e) => {
+                                    err = Some(e.to_string());
+                                }
+                            },
+                            Err(e) => {
+                                err = Some(e.to_string());
+                            }
+                        }
+                        if let Some(e) = err {
+                            self.toasts.add(egui_toast::Toast {
+                                kind: egui_toast::ToastKind::Error,
+                                text: format!("Error Write JSON: {}", e).into(),
+                                options: egui_toast::ToastOptions::default()
+                                    .duration_in_seconds(5f64)
+                                    .show_progress(true),
+                            });
+                        } else {
+                            self.toasts.add(egui_toast::Toast {
+                                kind: egui_toast::ToastKind::Success,
+                                text: format!("Exported JSON to {}", path.display()).into(),
+                                options: egui_toast::ToastOptions::default()
+                                    .duration_in_seconds(2f64)
+                                    .show_progress(true),
+                            });
+                        };
+                    }
+                }
+            }
+            FileDialog::ImportJson(dlg) => {
+                if dlg.show(ctx).selected() {
+                    if let Some(path) = dlg.path() {
+                        let mut err = None;
+                        match std::fs::read_to_string(path) {
+                            Ok(str) => {
+                                match serde_json::from_str::<Vec<color_item::ColorItem>>(&str) {
+                                    Ok(mut color) => {
+                                        self.tab_viewer.colors.append(&mut color);
+                                    }
+                                    Err(e) => {
+                                        err = Some(e.to_string());
                                     }
                                 }
+                            }
+                            Err(e) => {
+                                err = Some(e.to_string());
+                            }
+                        }
+                        if let Some(e) = err {
+                            self.toasts.add(egui_toast::Toast {
+                                kind: egui_toast::ToastKind::Error,
+                                text: format!("\u{e654} Error Read JSON: {e}").into(),
+                                options: egui_toast::ToastOptions::default()
+                                    .duration_in_seconds(5f64)
+                                    .show_progress(true),
                             });
-                        });
-                });
-                ui.add_sized(
-                    [MARGIN / 4f32, height - MARGIN],
-                    egui::widgets::Separator::default(),
-                );
-                if let Some(id) = self.texture_id {
-                    ui.add(
-                        egui::Image::from_texture(egui::load::SizedTexture::new(
-                            id,
-                            [self.image.width() as f32, self.image.height() as f32],
-                        ))
-                        .fit_to_exact_size([width / 2f32 - MARGIN, height - MARGIN].into()),
-                    );
+                        } else {
+                            self.toasts.add(egui_toast::Toast {
+                                kind: egui_toast::ToastKind::Success,
+                                text: format!("Imported JSON from {}", path.display()).into(),
+                                options: egui_toast::ToastOptions::default()
+                                    .duration_in_seconds(2f64)
+                                    .show_progress(true),
+                            });
+                        };
+                    }
                 }
-            });
-        });
+            }
+            FileDialog::None => {}
+        }
         if let Some(msg) = ui_msg {
             match msg {
                 Msg::File(msg) => match msg {
                     MsgFile::Clear => {
-                        self.image = image::DynamicImage::new_rgb8(
-                            (width / 2f32) as _,
-                            (height - MARGIN) as _,
-                        );
-                        self.update_texture(ctx);
+                        self.tab_viewer.image = PLACEHOLDER.clone();
+                        self.tab_viewer.update_texture(ctx);
                     }
                     MsgFile::Save => {
-                        let path = rfd::FileDialog::new()
-                            .add_filter("PNG Image", &["png"])
-                            .set_title("Save Image")
-                            .save_file();
-                        if let Some(path) = path {
-                            if let Err(e) = self.image.save(path) {
-                                simple_message_box::create_message_box(
-                                    format!("Error:{e}").as_str(),
-                                    "Error",
-                                );
-                            };
-                        };
+                        let mut dialog = egui_file::FileDialog::save_file(None)
+                            .title("Save PNG")
+                            .default_filename("untitled.png")
+                            .filename_filter(Box::new(|name| name.ends_with(".png")))
+                            .default_size(egui::vec2(width / 2f32, height - 2f32 * MARGIN))
+                            .current_pos(egui::pos2(width / 4f32, MARGIN));
+                        dialog.open();
+                        self.file_dialog = FileDialog::SaveImg(dialog);
                     }
                     MsgFile::Exit => {
                         std::process::exit(0);
@@ -271,99 +467,76 @@ impl eframe::App for MainWindow {
                 },
                 Msg::Color(msg) => match msg {
                     MsgColor::Clear => {
-                        self.colors.clear();
+                        self.tab_viewer.colors.clear();
                     }
                     MsgColor::Reverse => {
-                        self.colors.reverse();
+                        self.tab_viewer.colors.reverse();
                     }
                     MsgColor::SortByName => {
-                        self.colors.sort_by(|a, b| a.name.cmp(&b.name));
+                        self.tab_viewer.colors.sort_by(|a, b| a.name.cmp(&b.name));
                     }
                     MsgColor::SortByR => {
-                        self.colors.sort_by(|a, b| a.r.cmp(&b.r));
+                        self.tab_viewer.colors.sort_by(|a, b| a.r.cmp(&b.r));
                     }
                     MsgColor::SortByG => {
-                        self.colors.sort_by(|a, b| a.g.cmp(&b.g));
+                        self.tab_viewer.colors.sort_by(|a, b| a.g.cmp(&b.g));
                     }
                     MsgColor::SortByB => {
-                        self.colors.sort_by(|a, b| a.b.cmp(&b.b));
+                        self.tab_viewer.colors.sort_by(|a, b| a.b.cmp(&b.b));
                     }
                     MsgColor::SortByH => {
-                        self.colors.sort_by(|a, b| a.get_h().total_cmp(&b.get_h()));
+                        self.tab_viewer
+                            .colors
+                            .sort_by(|a, b| a.get_h().total_cmp(&b.get_h()));
                     }
                     MsgColor::SortByS => {
-                        self.colors.sort_by(|a, b| a.get_s().total_cmp(&b.get_s()));
+                        self.tab_viewer
+                            .colors
+                            .sort_by(|a, b| a.get_s().total_cmp(&b.get_s()));
                     }
                     MsgColor::SortByV => {
-                        self.colors.sort_by(|a, b| a.get_v().total_cmp(&b.get_v()));
+                        self.tab_viewer
+                            .colors
+                            .sort_by(|a, b| a.get_v().total_cmp(&b.get_v()));
                     }
                     MsgColor::Import => {
-                        let path = rfd::FileDialog::new()
-                            .add_filter("JSON", &["json"])
-                            .set_title("Import JSON")
-                            .pick_file();
-                        if let Some(path) = path {
-                            let mut err = None;
-                            match std::fs::read_to_string(path) {
-                                Ok(str) => {
-                                    match serde_json::from_str::<Vec<color_item::ColorItem>>(&str) {
-                                        Ok(mut color) => {
-                                            self.colors.append(&mut color);
-                                        },
-                                        Err(e) => {
-                                            err = Some(e.to_string());
-                                        }
-                                    }
-                                },
-                                Err(e) => {
-                                    err = Some(e.to_string());
-                                }
-                            }
-                            if let Some(e) = err {
-                                simple_message_box::create_message_box(
-                                    format!("Error Read JSON:{e}").as_str(),
-                                    "Error",
-                                );
-                            }
-                        }
+                        let mut dialog = egui_file::FileDialog::open_file(None)
+                            .title("Import JSON")
+                            .filename_filter(Box::new(|name| name.ends_with(".json")))
+                            .default_size(egui::vec2(width / 2f32, height - 2f32 * MARGIN))
+                            .current_pos(egui::pos2(width / 4f32, MARGIN));
+                        dialog.open();
+                        self.file_dialog = FileDialog::ImportJson(dialog);
                     }
                     MsgColor::Export => {
-                        let path = rfd::FileDialog::new()
-                            .add_filter("JSON", &["json"])
-                            .set_title("Export JSON")
-                            .save_file();
-                        if let Some(path) = path {
-                            let mut err = None;
-                            match serde_json::to_string(&self.colors) {
-                                Ok(str) => {
-                                    match std::fs::write(path, str) {
-                                        Ok(_) => {},
-                                        Err(e) => {
-                                            err = Some(e.to_string());
-                                        }
-                                    }
-                                },
-                                Err(e) => {
-                                    err = Some(e.to_string());
-                                }
-                            }
-                            if let Some(e) = err {
-                                simple_message_box::create_message_box(
-                                    format!("Error Write JSON:{e}").as_str(),
-                                    "Error",
-                                );
-                            }
-                        }
+                        let mut dialog = egui_file::FileDialog::save_file(None)
+                            .title("Export JSON")
+                            .default_filename("untitled.json")
+                            .filename_filter(Box::new(|name| name.ends_with(".json")))
+                            .default_size(egui::vec2(width / 2f32, height - 2f32 * MARGIN))
+                            .current_pos(egui::pos2(width / 4f32, MARGIN));
+                        dialog.open();
+                        self.file_dialog = FileDialog::ExportJson(dialog);
                     }
                 },
                 Msg::Add(color) => {
                     for i in color {
-                        self.colors.push(i);
+                        self.tab_viewer.colors.push(i);
                     }
                 }
                 Msg::Gen(img) => {
-                    self.image = img;
-                    self.update_texture(ctx);
+                    self.tab_viewer.image = img;
+                    self.tab_viewer.update_texture(ctx);
+                },
+                Msg::AdjustTab(tab) => {
+                    match self.dock_tree.find_tab(&tab) {
+                        Some(_index) => {
+                            // todo BUG?
+                        }
+                        None => {
+                            self.dock_tree.add_window(vec![tab]);
+                        }
+                    }
                 }
             }
         }

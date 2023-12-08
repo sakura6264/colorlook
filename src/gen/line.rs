@@ -3,7 +3,6 @@ use eframe::egui::{self, RichText};
 use std::sync::mpsc;
 use std::thread;
 
-const MARGIN: f32 = 10f32;
 
 pub struct Line {
     positions: Vec<f32>,
@@ -94,15 +93,13 @@ impl Line {
                 color.to_color32(),
                 egui::Stroke::new(0.5f32, egui::Color32::WHITE),
             );
-            ui.add(egui::Slider::new(position, 0.0..=1.0).fixed_decimals(2)
-            );
+            ui.add(egui::Slider::new(position, 0.0..=1.0).fixed_decimals(2));
             ui.label(
                 RichText::new(crate::utils::resized_str(&color.name, 12))
                     .color(color.get_full_value_color32()),
             );
         });
     }
-
 }
 
 impl super::Generate for Line {
@@ -130,10 +127,7 @@ impl super::Generate for Line {
         self.positions[positions_len - 1] = 1.0;
         ui.horizontal(|ui| {
             ui.label("\u{f0937} Angle:");
-            ui.add(
-                egui::Slider::new(&mut self.angel, 0.0..=90.0)
-                    .text("°"),
-            );
+            ui.add(egui::Slider::new(&mut self.angel, 0.0..=90.0).text("°"));
         });
         ui.horizontal(|ui| {
             ui.label("\u{f019e} Width:");
@@ -205,38 +199,30 @@ impl super::Generate for Line {
                     egui::Stroke::new(2f32, color.to_color32())
                 };
                 let pos_x = rect.left() + pos * rect.width();
-                painter.vline(pos_x, eframe::emath::Rangef::new(rect.top(), rect.bottom()), stroke);
+                painter.vline(
+                    pos_x,
+                    eframe::emath::Rangef::new(rect.top(), rect.bottom()),
+                    stroke,
+                );
             }
             return highlight;
         });
         if let Some(hl) = highlight.inner {
-            ui.label(RichText::new(crate::utils::resized_str(&colors[hl].name, 24)).color(colors[hl].get_full_value_color32()));
-        }
-        else {
+            ui.label(
+                RichText::new(crate::utils::resized_str(&colors[hl].name, 24))
+                    .color(colors[hl].get_full_value_color32()),
+            );
+        } else {
             ui.label("None");
         }
 
         ui.separator();
-        let mut cursor = ui.cursor();
-        let size = ui.available_size();
-        cursor.set_height(size.y - MARGIN);
-        cursor.set_width(size.x);
-        ui.allocate_ui_at_rect(cursor, |ui| {
-            egui::ScrollArea::new([false, true])
-                .scroll_bar_visibility(
-                    egui::containers::scroll_area::ScrollBarVisibility::AlwaysVisible,
-                )
-                .min_scrolled_height(size.y - MARGIN)
-                .id_source("line_list")
-                .show(ui, |ui| {
-                    let mut size = ui.available_size();
-                    size.y = 10f32;
-                    ui.add_sized(size, egui::Label::new("\u{f0835} Positions"));
-                    for i in 0..colors.len() {
-                        Self::display_color(ui, &mut self.positions[i], &colors[i]);
-                    }
-                });
-        });
+
+        ui.label("\u{f0835} Positions:");
+        for i in 0..colors.len() {
+            Self::display_color(ui, &mut self.positions[i], &colors[i]);
+        }
+
         if let Some(hth) = &self.hthread {
             if hth.is_finished() {
                 if let Some(rx) = self.channel.take() {

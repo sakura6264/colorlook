@@ -13,6 +13,32 @@ enum Color {
     HSV((f32, f32, f32)),
 }
 
+impl Color {
+    fn get_type(&self) -> ColorType {
+        match self {
+            Color::RGB(_) => ColorType::RGB,
+            Color::HEX(_) => ColorType::HEX,
+            Color::HSV(_) => ColorType::HSV,
+        }
+    }
+    fn set_rgb(&mut self, r: u8, g: u8, b: u8) {
+        *self = Color::RGB((r, g, b));
+    }
+    fn set_hex(&mut self, hex: String) {
+        *self = Color::HEX(hex);
+    }
+    fn set_hsv(&mut self, h: f32, s: f32, v: f32) {
+        *self = Color::HSV((h, s, v));
+    }
+}
+
+#[derive(Clone, Copy, PartialEq, Eq)]
+enum ColorType {
+    RGB,
+    HEX,
+    HSV,
+}
+
 impl Customized {
     pub fn new() -> Self {
         Self {
@@ -27,13 +53,22 @@ impl super::AddColor for Customized {
         return "\u{eae6} Customized Color".into();
     }
     fn paint_ui(&mut self, ui: &mut egui::Ui) -> Option<Vec<crate::color_item::ColorItem>> {
-        let mut ret = None;
+        let mut ret = false;
+        let mut colortype = self.color.get_type();
         ui.horizontal(|ui| {
             ui.label("\u{f1050} Name:");
             ui.text_edit_singleline(&mut self.name);
         });
-        let mut color_change = None;
         let color;
+        ui.horizontal(|ui| {
+            if ui.button("\u{ea60} Add").clicked() {
+                ret = true;
+                self.name = super::get_random_name(8);
+            }
+            ui.selectable_value(&mut colortype, ColorType::RGB, "\u{f0ae4} RGB");
+            ui.selectable_value(&mut colortype, ColorType::HEX, "\u{f12a7} HEX");
+            ui.selectable_value(&mut colortype, ColorType::HSV, "\u{f04c5} HSV");
+        });
         match self.color {
             Color::RGB((ref mut r, ref mut g, ref mut b)) => {
                 color = color_item::ColorItem {
@@ -42,15 +77,6 @@ impl super::AddColor for Customized {
                     g: *g,
                     b: *b,
                 };
-                ui.horizontal(|ui| {
-                    if ui.button("\u{ea60} Add").clicked() {
-                        ret = Some(vec![color.clone()]);
-                        self.name = super::get_random_name(8);
-                    }
-                    if ui.button("\u{f0ae4} RGB").clicked() {
-                        color_change = Some(Color::HEX(color.get_hex()));
-                    }
-                });
                 ui.horizontal(|ui| {
                     ui.label(RichText::new("R:").color(egui::Color32::RED));
                     ui.add(egui::DragValue::new(r).clamp_range(0..=255).speed(1.0));
@@ -76,44 +102,41 @@ impl super::AddColor for Customized {
                     },
                 };
                 ui.horizontal(|ui| {
-                    if ui.button("\u{ea60} Add").clicked() {
-                        ret = Some(vec![color.clone()]);
-                        self.name = super::get_random_name(8);
-                    }
-                    if ui.button("\u{f12a7} HEX").clicked() {
-                        color_change = Some(Color::HSV((color.get_h(), color.get_s(), color.get_v())));
-                    }
-                });
-                ui.horizontal(|ui| {
                     ui.label("HEX:");
                     ui.text_edit_singleline(hex);
                 });
                 if c.is_none() {
                     ui.label("Warning: Invalid HEX");
                 }
-            },
+            }
             Color::HSV((ref mut h, ref mut s, ref mut v)) => {
                 color = color_item::ColorItem::from_hsv(*h, *s, *v, self.name.as_str());
                 ui.horizontal(|ui| {
-                    if ui.button("\u{ea60} Add").clicked() {
-                        ret = Some(vec![color.clone()]);
-                        self.name = super::get_random_name(8);
-                    }
-                    if ui.button("\u{f04c5} HSV").clicked() {
-                        color_change = Some(Color::RGB((color.r, color.g, color.b)));
-                    }
-                });
-                ui.horizontal(|ui| {
                     ui.label(RichText::new("H:").color(egui::Color32::LIGHT_BLUE));
-                    ui.add(egui::DragValue::new(h).clamp_range(0f32..=360f32).fixed_decimals(2).speed(1.0));
+                    ui.add(
+                        egui::DragValue::new(h)
+                            .clamp_range(0f32..=360f32)
+                            .fixed_decimals(2)
+                            .speed(1.0),
+                    );
                 });
                 ui.horizontal(|ui| {
                     ui.label(RichText::new("S:").color(egui::Color32::KHAKI));
-                    ui.add(egui::DragValue::new(s).clamp_range(0f32..=1f32).fixed_decimals(2).speed(0.01));
+                    ui.add(
+                        egui::DragValue::new(s)
+                            .clamp_range(0f32..=1f32)
+                            .fixed_decimals(2)
+                            .speed(0.01),
+                    );
                 });
                 ui.horizontal(|ui| {
                     ui.label(RichText::new("V:").color(egui::Color32::WHITE));
-                    ui.add(egui::DragValue::new(v).clamp_range(0f32..=1f32).fixed_decimals(2).speed(0.01));
+                    ui.add(
+                        egui::DragValue::new(v)
+                            .clamp_range(0f32..=1f32)
+                            .fixed_decimals(2)
+                            .speed(0.01),
+                    );
                 });
             }
         }
@@ -130,10 +153,23 @@ impl super::AddColor for Customized {
             egui::Stroke::new(2f32, egui::Color32::WHITE),
         );
 
-        if let Some(color_change) = color_change {
-            self.color = color_change;
+        if self.color.get_type() != colortype {
+            match colortype {
+                ColorType::RGB => {
+                    self.color.set_rgb(color.r, color.g, color.b);
+                }
+                ColorType::HEX => {
+                    self.color.set_hex(color.get_hex());
+                }
+                ColorType::HSV => {
+                    self.color
+                        .set_hsv(color.get_h(), color.get_s(), color.get_v());
+                }
+            }
         }
-
-        return ret;
+        if ret {
+            return Some(vec![color]);
+        }
+        return None;
     }
 }

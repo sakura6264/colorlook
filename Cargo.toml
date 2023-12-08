@@ -6,11 +6,12 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-eframe = {version = "*", default-features = false, features = ["wgpu","accesskit"]}
+eframe = {version = "*", default-features = false, features = ["glow","accesskit"]}
 serde = { version = "*", features = ["derive"] }
 serde_json = "*"
-simple-message-box = "*"
-rfd = "*"
+egui-toast = "*"
+egui_file = "*"
+egui_dock = "*"
 image = { version = "*", features = ["png"] }
 rand = "*"
 include-flate = "*"

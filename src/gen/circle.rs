@@ -3,7 +3,6 @@ use eframe::egui::{self, RichText};
 use std::sync::mpsc;
 use std::thread;
 
-const MARGIN: f32 = 10f32;
 
 pub struct Circle {
     positions: Vec<f32>,
@@ -99,15 +98,13 @@ impl Circle {
                 color.to_color32(),
                 egui::Stroke::new(0.5f32, egui::Color32::WHITE),
             );
-            ui.add(egui::Slider::new(position, 0.0..=1.0).fixed_decimals(2)
-            );
+            ui.add(egui::Slider::new(position, 0.0..=1.0).fixed_decimals(2));
             ui.label(
                 RichText::new(crate::utils::resized_str(&color.name, 12))
                     .color(color.get_full_value_color32()),
             );
         });
     }
-
 }
 
 impl super::Generate for Circle {
@@ -188,8 +185,10 @@ impl super::Generate for Circle {
             let mut highlight = None;
             if let Some(pos) = response.hover_pos() {
                 for i in 0..positions_len {
-                    let pos2center = ((pos.x - center_x)*(pos.x-center_x) + (pos.y-center_y)*(pos.y-center_y)).sqrt();
-                    if (pos2center - width*self.positions[i] / 2f32).abs() < 4f32 {
+                    let pos2center = ((pos.x - center_x) * (pos.x - center_x)
+                        + (pos.y - center_y) * (pos.y - center_y))
+                        .sqrt();
+                    if (pos2center - width * self.positions[i] / 2f32).abs() < 4f32 {
                         highlight = Some(i);
                         break;
                     }
@@ -209,38 +208,31 @@ impl super::Generate for Circle {
                     egui::Stroke::new(2f32, color.to_color32())
                 };
                 let radius = width * pos / 2f32;
-                painter.circle_stroke(center_pos, radius, stroke);
+                if radius < stroke.width {
+                    painter.circle_filled(center_pos, stroke.width / 2f32, stroke.color);
+                }
+                else {
+                    painter.circle_stroke(center_pos, radius, stroke);
+                }
             }
             return highlight;
         });
         if let Some(hl) = highlight.inner {
-            ui.label(RichText::new(crate::utils::resized_str(&colors[hl].name, 24)).color(colors[hl].get_full_value_color32()));
-        }
-        else {
+            ui.label(
+                RichText::new(crate::utils::resized_str(&colors[hl].name, 24))
+                    .color(colors[hl].get_full_value_color32()),
+            );
+        } else {
             ui.label("None");
         }
 
         ui.separator();
-        let mut cursor = ui.cursor();
-        let size = ui.available_size();
-        cursor.set_height(size.y - MARGIN);
-        cursor.set_width(size.x);
-        ui.allocate_ui_at_rect(cursor, |ui| {
-            egui::ScrollArea::new([false, true])
-                .scroll_bar_visibility(
-                    egui::containers::scroll_area::ScrollBarVisibility::AlwaysVisible,
-                )
-                .min_scrolled_height(size.y - MARGIN)
-                .id_source("line_list")
-                .show(ui, |ui| {
-                    let mut size = ui.available_size();
-                    size.y = 10f32;
-                    ui.add_sized(size, egui::Label::new("\u{f0835} Positions"));
-                    for i in 0..colors.len() {
-                        Self::display_color(ui, &mut self.positions[i], &colors[i]);
-                    }
-                });
-        });
+
+        ui.label("\u{f0835} Positions:");
+        for i in 0..colors.len() {
+            Self::display_color(ui, &mut self.positions[i], &colors[i]);
+        }
+
         if let Some(hth) = &self.hthread {
             if hth.is_finished() {
                 if let Some(rx) = self.channel.take() {

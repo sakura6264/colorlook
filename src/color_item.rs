@@ -11,7 +11,7 @@ pub enum VecOp {
     Delete,
 }
 
-#[derive(Clone, Serialize, Deserialize)]
+#[derive(Clone, Serialize, Deserialize, PartialEq, Eq)]
 pub struct ColorItem {
     pub name: String,
     pub r: u8,

@@ -17,8 +17,6 @@ lazy_static::lazy_static! {
      ];
 }
 
-
-
 pub struct MainWindow {
     toasts: egui_toast::Toasts,
     file_dialog: FileDialog,
@@ -33,6 +31,7 @@ pub struct MainWindowTabViewer {
     pub add_component: Option<Box<dyn crate::add::AddColor>>,
     pub gen_component: Option<Box<dyn crate::gen::Generate>>,
     pub ui_msg: Option<TabMsg>,
+    pub need_close: Option<Tabs>,
 }
 
 #[derive(Clone, Copy, PartialEq)]
@@ -45,7 +44,6 @@ pub enum Tabs {
 
 impl MainWindowTabViewer {
     pub fn new() -> Self {
-
         return Self {
             colors: Vec::new(),
             image: PLACEHOLDER.clone(),
@@ -53,6 +51,7 @@ impl MainWindowTabViewer {
             add_component: None,
             gen_component: None,
             ui_msg: None,
+            need_close: None,
         };
     }
     pub fn update_texture(&mut self, ctx: &egui::Context) {
@@ -105,31 +104,31 @@ impl egui_dock::TabViewer for MainWindowTabViewer {
                 ui.vertical(|ui| {
                     color_item::draw_color_items(ui, &mut self.colors);
                 });
-            },
+            }
             Tabs::Add => {
                 ui.vertical(|ui| match self.add_component {
                     Some(ref mut component) => {
-                        if let Some(color) = component.paint_ui(ui) {
+                        if let Some(color) = component.paint_ui(ui, &self.image) {
                             self.ui_msg = Some(TabMsg::Add(color));
                         }
-                    },
+                    }
                     None => {
                         ui.label("\u{f08a4} No Component Selected.");
                     }
                 });
-            },
+            }
             Tabs::Gen => {
                 ui.vertical(|ui| match self.gen_component {
                     Some(ref mut component) => {
                         if let Some(img) = component.paint_ui(ui, &self.colors) {
                             self.ui_msg = Some(TabMsg::Gen(img));
                         }
-                    },
+                    }
                     None => {
                         ui.label("\u{f08a4} No Component Selected.");
                     }
                 });
-            },
+            }
             Tabs::Preview => {
                 if let Some(id) = self.texture_id {
                     ui.add(
@@ -147,14 +146,24 @@ impl egui_dock::TabViewer for MainWindowTabViewer {
     fn allowed_in_windows(&self, _tab: &mut Self::Tab) -> bool {
         true
     }
+
+    fn force_close(&mut self, tab: &mut Self::Tab) -> bool {
+        if Some(tab.clone()) == self.need_close {
+            self.need_close = None;
+            return true;
+        }
+        return false;
+    }
 }
 
 impl MainWindow {
     pub fn new() -> Self {
         let mut tree = egui_dock::DockState::new(vec![Tabs::Preview]);
-        let [_, b] =
-            tree.main_surface_mut()
-                .split_left(egui_dock::NodeIndex::root(), 0.5, vec![Tabs::Add, Tabs::Gen]);
+        let [_, b] = tree.main_surface_mut().split_left(
+            egui_dock::NodeIndex::root(),
+            0.5,
+            vec![Tabs::Add, Tabs::Gen],
+        );
         let [_, _] = tree
             .main_surface_mut()
             .split_left(b, 0.5, vec![Tabs::Colors]);
@@ -172,6 +181,7 @@ impl MainWindow {
 
 #[derive(Clone, Copy)]
 pub enum MsgFile {
+    Load,
     Clear,
     Save,
     Exit,
@@ -209,6 +219,7 @@ pub enum TabMsg {
 
 pub enum FileDialog {
     None,
+    LoadImg(egui_file::FileDialog),
     SaveImg(egui_file::FileDialog),
     ExportJson(egui_file::FileDialog),
     ImportJson(egui_file::FileDialog),
@@ -222,12 +233,17 @@ impl eframe::App for MainWindow {
         // manage message. No One can click 2 buttons in one frame.
         let mut ui_msg = None;
         //register shortcut
+        let openshortcut = egui::KeyboardShortcut::new(egui::Modifiers::CTRL, egui::Key::O);
         let saveshortcut = egui::KeyboardShortcut::new(egui::Modifiers::CTRL, egui::Key::S);
         let clearshortcut = egui::KeyboardShortcut::new(egui::Modifiers::CTRL, egui::Key::C);
         let exitshortcut = egui::KeyboardShortcut::new(egui::Modifiers::CTRL, egui::Key::Q);
+        let openshortcuttext = ctx.format_shortcut(&openshortcut);
         let saveshortcuttext = ctx.format_shortcut(&saveshortcut);
         let clearshortcuttext = ctx.format_shortcut(&clearshortcut);
         let exitshortcuttext = ctx.format_shortcut(&exitshortcut);
+        if ctx.input(|is| is.clone().consume_shortcut(&openshortcut)) {
+            ui_msg = Some(Msg::File(MsgFile::Load));
+        }
         if ctx.input(|is| is.clone().consume_shortcut(&saveshortcut)) {
             ui_msg = Some(Msg::File(MsgFile::Save));
         }
@@ -240,6 +256,12 @@ impl eframe::App for MainWindow {
         egui::CentralPanel::default().show(ctx, |ui| {
             egui::menu::bar(ui, |ui| {
                 ui.menu_button("\u{f0214} File", |ui| {
+                    if ui
+                        .add(egui::Button::new("\u{f0214} Load").shortcut_text(openshortcuttext))
+                        .clicked()
+                    {
+                        ui_msg = Some(Msg::File(MsgFile::Load));
+                    }
                     if ui
                         .add(egui::Button::new("\u{f1604} Clear").shortcut_text(saveshortcuttext))
                         .clicked()
@@ -303,7 +325,7 @@ impl eframe::App for MainWindow {
                         }
                     };
                     for (tab, text) in TABLIST.iter() {
-                        if ui.button(getlabel(tab,text)).clicked() {
+                        if ui.button(getlabel(tab, text)).clicked() {
                             ui_msg = Some(Msg::AdjustTab(tab.clone()));
                         }
                     }
@@ -337,7 +359,7 @@ impl eframe::App for MainWindow {
                     }
                     TabMsg::Gen(img) => {
                         ui_msg = Some(Msg::Gen(img.clone()));
-                    },
+                    }
                 }
                 self.tab_viewer.ui_msg = None;
             }
@@ -345,6 +367,34 @@ impl eframe::App for MainWindow {
         }
         self.toasts.show(ctx);
         match &mut self.file_dialog {
+            FileDialog::LoadImg(dlg) => {
+                if dlg.show(ctx).selected() {
+                    if let Some(path) = dlg.path() {
+                        match image::open(path) {
+                            Ok(img) => {
+                                self.tab_viewer.image = img;
+                                self.tab_viewer.update_texture(ctx);
+                                self.toasts.add(egui_toast::Toast {
+                                    kind: egui_toast::ToastKind::Success,
+                                    text: format!("Loaded Image from {}", path.display()).into(),
+                                    options: egui_toast::ToastOptions::default()
+                                        .duration_in_seconds(2f64)
+                                        .show_progress(true),
+                                });
+                            }
+                            Err(e) => {
+                                self.toasts.add(egui_toast::Toast {
+                                    kind: egui_toast::ToastKind::Error,
+                                    text: format!("Error: {}", e).into(),
+                                    options: egui_toast::ToastOptions::default()
+                                        .duration_in_seconds(5f64)
+                                        .show_progress(true),
+                                });
+                            }
+                        }
+                    }
+                }
+            }
             FileDialog::SaveImg(dlg) => {
                 if dlg.show(ctx).selected() {
                     if let Some(path) = dlg.path() {
@@ -447,6 +497,14 @@ impl eframe::App for MainWindow {
         if let Some(msg) = ui_msg {
             match msg {
                 Msg::File(msg) => match msg {
+                    MsgFile::Load => {
+                        let mut dialog = egui_file::FileDialog::open_file(None)
+                            .title("Load Image")
+                            .default_size(egui::vec2(width / 2f32, height - 2f32 * MARGIN))
+                            .current_pos(egui::pos2(width / 4f32, MARGIN));
+                        dialog.open();
+                        self.file_dialog = FileDialog::LoadImg(dialog);
+                    }
                     MsgFile::Clear => {
                         self.tab_viewer.image = PLACEHOLDER.clone();
                         self.tab_viewer.update_texture(ctx);
@@ -527,17 +585,15 @@ impl eframe::App for MainWindow {
                 Msg::Gen(img) => {
                     self.tab_viewer.image = img;
                     self.tab_viewer.update_texture(ctx);
-                },
-                Msg::AdjustTab(tab) => {
-                    match self.dock_tree.find_tab(&tab) {
-                        Some(_index) => {
-                            // todo BUG?
-                        }
-                        None => {
-                            self.dock_tree.add_window(vec![tab]);
-                        }
-                    }
                 }
+                Msg::AdjustTab(tab) => match self.dock_tree.find_tab(&tab) {
+                    Some(_index) => {
+                        self.tab_viewer.need_close = Some(tab);
+                    }
+                    None => {
+                        self.dock_tree.add_window(vec![tab]);
+                    }
+                },
             }
         }
     }

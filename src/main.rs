@@ -8,6 +8,7 @@ use eframe::egui;
 use eframe::egui::ViewportBuilder;
 use std::sync::Arc;
 
+
 include_flate::flate!(static NERDFONTS: [u8] from "assets/SymbolsNF.ttf");
 include_flate::flate!(static HACKFONT: [u8] from "assets/HackNerdFont-Regular.ttf");
 include_flate::flate!(static ICON: [u8] from "assets/colorlook.png");

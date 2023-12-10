@@ -5,18 +5,25 @@ edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
+
+
 [dependencies]
-eframe = {version = "*", default-features = false, features = ["glow","accesskit"]}
+eframe = { version = "*", default-features = false, features = [
+    "glow",
+    "accesskit",
+] }
 serde = { version = "*", features = ["derive"] }
 serde_json = "*"
 egui-toast = "*"
 egui_file = "*"
 egui_dock = "*"
-image = { version = "*", features = ["png"] }
+image = { version = "*", features = ["jpeg","png"] }
 rand = "*"
 include-flate = "*"
 lazy_static = "*"
 regex = "*"
+num-traits = "*"
+statrs     = "*"
 
 [build-dependencies]
 embed-resource = "*"

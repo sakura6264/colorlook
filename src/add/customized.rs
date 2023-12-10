@@ -42,7 +42,7 @@ enum ColorType {
 impl Customized {
     pub fn new() -> Self {
         Self {
-            name: super::get_random_name(8),
+            name: crate::utils::get_random_name(8),
             color: Color::RGB((0, 0, 0)),
         }
     }
@@ -52,7 +52,7 @@ impl super::AddColor for Customized {
     fn get_name(&self) -> String {
         return "\u{eae6} Customized Color".into();
     }
-    fn paint_ui(&mut self, ui: &mut egui::Ui) -> Option<Vec<crate::color_item::ColorItem>> {
+    fn paint_ui(&mut self, ui: &mut egui::Ui, _buffer:&image::DynamicImage) -> Option<Vec<crate::color_item::ColorItem>> {
         let mut ret = false;
         let mut colortype = self.color.get_type();
         ui.horizontal(|ui| {
@@ -63,7 +63,7 @@ impl super::AddColor for Customized {
         ui.horizontal(|ui| {
             if ui.button("\u{ea60} Add").clicked() {
                 ret = true;
-                self.name = super::get_random_name(8);
+                self.name = crate::utils::get_random_name(8);
             }
             ui.selectable_value(&mut colortype, ColorType::RGB, "\u{f0ae4} RGB");
             ui.selectable_value(&mut colortype, ColorType::HEX, "\u{f12a7} HEX");

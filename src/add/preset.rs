@@ -169,7 +169,7 @@ impl super::AddColor for Preset {
     fn get_name(&self) -> String {
         return "\u{eae6} Preset Color".into();
     }
-    fn paint_ui(&mut self, ui: &mut egui::Ui) -> Option<Vec<color_item::ColorItem>> {
+    fn paint_ui(&mut self, ui: &mut egui::Ui, _buffer:&image::DynamicImage) -> Option<Vec<color_item::ColorItem>> {
         let mut focused = false;
         if self.colorlist.is_empty() {
             ui.label("No preset color found.");

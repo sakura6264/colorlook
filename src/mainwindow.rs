@@ -31,7 +31,6 @@ pub struct MainWindowTabViewer {
     pub add_component: Option<Box<dyn crate::add::AddColor>>,
     pub gen_component: Option<Box<dyn crate::gen::Generate>>,
     pub ui_msg: Option<TabMsg>,
-    pub need_close: Option<Tabs>,
 }
 
 #[derive(Clone, Copy, PartialEq)]
@@ -51,7 +50,6 @@ impl MainWindowTabViewer {
             add_component: None,
             gen_component: None,
             ui_msg: None,
-            need_close: None,
         };
     }
     pub fn update_texture(&mut self, ctx: &egui::Context) {
@@ -145,14 +143,6 @@ impl egui_dock::TabViewer for MainWindowTabViewer {
 
     fn allowed_in_windows(&self, _tab: &mut Self::Tab) -> bool {
         true
-    }
-
-    fn force_close(&mut self, tab: &mut Self::Tab) -> bool {
-        if Some(tab.clone()) == self.need_close {
-            self.need_close = None;
-            return true;
-        }
-        return false;
     }
 }
 
@@ -587,8 +577,8 @@ impl eframe::App for MainWindow {
                     self.tab_viewer.update_texture(ctx);
                 }
                 Msg::AdjustTab(tab) => match self.dock_tree.find_tab(&tab) {
-                    Some(_index) => {
-                        self.tab_viewer.need_close = Some(tab);
+                    Some(index) => {
+                        self.dock_tree.remove_tab(index);
                     }
                     None => {
                         self.dock_tree.add_window(vec![tab]);

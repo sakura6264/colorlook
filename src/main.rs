@@ -14,6 +14,8 @@ include_flate::flate!(static HACKFONT: [u8] from "assets/HackNerdFont-Regular.tt
 include_flate::flate!(static ICON: [u8] from "assets/colorlook.png");
 
 fn main() {
+    // set environment variable DISABLE_LAYER_AMD_SWITCHABLE_GRAPHICS_1=1 to avoid crash on AMD
+    std::env::set_var("DISABLE_LAYER_AMD_SWITCHABLE_GRAPHICS_1", "1");
     let icon_img = image::load_from_memory(&ICON).unwrap();
     let icon_buffer = icon_img.to_rgba8();
     let icon_pixels = icon_buffer.as_flat_samples();

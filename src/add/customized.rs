@@ -79,15 +79,15 @@ impl super::AddColor for Customized {
                 };
                 ui.horizontal(|ui| {
                     ui.label(RichText::new("R:").color(egui::Color32::RED));
-                    ui.add(egui::DragValue::new(r).clamp_range(0..=255).speed(1.0));
+                    ui.add(egui::DragValue::new(r).range(0..=255).speed(1.0));
                 });
                 ui.horizontal(|ui| {
                     ui.label(RichText::new("G:").color(egui::Color32::GREEN));
-                    ui.add(egui::DragValue::new(g).clamp_range(0..=255).speed(1.0));
+                    ui.add(egui::DragValue::new(g).range(0..=255).speed(1.0));
                 });
                 ui.horizontal(|ui| {
                     ui.label(RichText::new("B:").color(egui::Color32::BLUE));
-                    ui.add(egui::DragValue::new(b).clamp_range(0..=255).speed(1.0));
+                    ui.add(egui::DragValue::new(b).range(0..=255).speed(1.0));
                 });
             }
             Color::HEX(ref mut hex) => {
@@ -115,7 +115,7 @@ impl super::AddColor for Customized {
                     ui.label(RichText::new("H:").color(egui::Color32::LIGHT_BLUE));
                     ui.add(
                         egui::DragValue::new(h)
-                            .clamp_range(0f32..=360f32)
+                            .range(0f32..=360f32)
                             .fixed_decimals(2)
                             .speed(1.0),
                     );
@@ -124,7 +124,7 @@ impl super::AddColor for Customized {
                     ui.label(RichText::new("S:").color(egui::Color32::KHAKI));
                     ui.add(
                         egui::DragValue::new(s)
-                            .clamp_range(0f32..=1f32)
+                            .range(0f32..=1f32)
                             .fixed_decimals(2)
                             .speed(0.01),
                     );
@@ -133,7 +133,7 @@ impl super::AddColor for Customized {
                     ui.label(RichText::new("V:").color(egui::Color32::WHITE));
                     ui.add(
                         egui::DragValue::new(v)
-                            .clamp_range(0f32..=1f32)
+                            .range(0f32..=1f32)
                             .fixed_decimals(2)
                             .speed(0.01),
                     );

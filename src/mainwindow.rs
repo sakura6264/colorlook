@@ -370,6 +370,7 @@ impl eframe::App for MainWindow {
                                     options: egui_toast::ToastOptions::default()
                                         .duration_in_seconds(2f64)
                                         .show_progress(true),
+                                    style: egui_toast::ToastStyle::default(),
                                 });
                             }
                             Err(e) => {
@@ -379,6 +380,7 @@ impl eframe::App for MainWindow {
                                     options: egui_toast::ToastOptions::default()
                                         .duration_in_seconds(5f64)
                                         .show_progress(true),
+                                    style: egui_toast::ToastStyle::default(),
                                 });
                             }
                         }
@@ -395,6 +397,7 @@ impl eframe::App for MainWindow {
                                 options: egui_toast::ToastOptions::default()
                                     .duration_in_seconds(5f64)
                                     .show_progress(true),
+                                style: egui_toast::ToastStyle::default(),
                             });
                         } else {
                             self.toasts.add(egui_toast::Toast {
@@ -403,6 +406,7 @@ impl eframe::App for MainWindow {
                                 options: egui_toast::ToastOptions::default()
                                     .duration_in_seconds(2f64)
                                     .show_progress(true),
+                                style: egui_toast::ToastStyle::default(),
                             });
                         };
                     }
@@ -430,6 +434,7 @@ impl eframe::App for MainWindow {
                                 options: egui_toast::ToastOptions::default()
                                     .duration_in_seconds(5f64)
                                     .show_progress(true),
+                                style: egui_toast::ToastStyle::default(),
                             });
                         } else {
                             self.toasts.add(egui_toast::Toast {
@@ -438,6 +443,7 @@ impl eframe::App for MainWindow {
                                 options: egui_toast::ToastOptions::default()
                                     .duration_in_seconds(2f64)
                                     .show_progress(true),
+                                style: egui_toast::ToastStyle::default(),
                             });
                         };
                     }
@@ -469,6 +475,7 @@ impl eframe::App for MainWindow {
                                 options: egui_toast::ToastOptions::default()
                                     .duration_in_seconds(5f64)
                                     .show_progress(true),
+                                style: egui_toast::ToastStyle::default(),
                             });
                         } else {
                             self.toasts.add(egui_toast::Toast {
@@ -477,6 +484,7 @@ impl eframe::App for MainWindow {
                                 options: egui_toast::ToastOptions::default()
                                     .duration_in_seconds(2f64)
                                     .show_progress(true),
+                                style: egui_toast::ToastStyle::default(),
                             });
                         };
                     }

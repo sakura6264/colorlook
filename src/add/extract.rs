@@ -49,7 +49,7 @@ impl super::AddColor for Extract {
             ui.add(
                 egui::DragValue::new(&mut self.max_color)
                     .speed(0.2)
-                    .clamp_range(1..=255),
+                    .range(1..=255),
             );
         });
         ui.horizontal(|ui| {

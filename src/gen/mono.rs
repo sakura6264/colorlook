@@ -56,13 +56,13 @@ impl super::Generate for Mono {
             ui.add(
                 egui::DragValue::new(&mut self.width)
                     .speed(1.0)
-                    .clamp_range(1..=16384),
+                    .range(1..=16384),
             );
             ui.label("\u{f019e} Height:");
             ui.add(
                 egui::DragValue::new(&mut self.height)
                     .speed(1.0)
-                    .clamp_range(1..=16384),
+                    .range(1..=16384),
             );
         });
         ui.separator();

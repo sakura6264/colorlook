@@ -77,13 +77,13 @@ impl super::Generate for Blocks {
             ui.add(
                 egui::DragValue::new(&mut self.width)
                     .speed(1.0)
-                    .clamp_range(1..=16384),
+                    .range(1..=16384),
             );
             ui.label("\u{f019e} Height:");
             ui.add(
                 egui::DragValue::new(&mut self.height)
                     .speed(1.0)
-                    .clamp_range(1..=16384),
+                    .range(1..=16384),
             );
         });
         ui.horizontal(|ui| {
@@ -91,13 +91,13 @@ impl super::Generate for Blocks {
             ui.add(
                 egui::DragValue::new(&mut self.x_num)
                     .speed(1.0)
-                    .clamp_range(1..=16384),
+                    .range(1..=16384),
             );
             ui.label("\u{f01d9} Y:");
             ui.add(
                 egui::DragValue::new(&mut self.y_num)
                     .speed(1.0)
-                    .clamp_range(1..=16384),
+                    .range(1..=16384),
             );
         });
         if ui.button("\u{f0674} Generate").clicked() {

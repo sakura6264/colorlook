@@ -216,13 +216,13 @@ impl super::AddColor for Preset {
         let size = ui.available_size();
         cursor.set_height(size.y - MARGIN);
         cursor.set_width(size.x);
-        ui.allocate_ui_at_rect(cursor, |ui| {
+        ui.allocate_new_ui(egui::UiBuilder::new().max_rect(cursor), |ui| {
             egui::ScrollArea::new([false, true])
                 .scroll_bar_visibility(
                     egui::containers::scroll_area::ScrollBarVisibility::AlwaysVisible,
                 )
                 .min_scrolled_height(size.y - MARGIN)
-                .id_source("preset_list")
+                .id_salt("preset_list")
                 .show(ui, |ui| {
                     let mut selected_vec = Vec::new();
                     let mut size = ui.available_size();

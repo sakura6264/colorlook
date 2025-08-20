@@ -52,7 +52,11 @@ impl super::AddColor for Customized {
     fn get_name(&self) -> String {
         return "\u{eae6} Customized Color".into();
     }
-    fn paint_ui(&mut self, ui: &mut egui::Ui, _buffer:&image::DynamicImage) -> Option<Vec<crate::color_item::ColorItem>> {
+    fn paint_ui(
+        &mut self,
+        ui: &mut egui::Ui,
+        _buffer: &image::DynamicImage,
+    ) -> Option<Vec<crate::color_item::ColorItem>> {
         let mut ret = false;
         let mut colortype = self.color.get_type();
         ui.horizontal(|ui| {

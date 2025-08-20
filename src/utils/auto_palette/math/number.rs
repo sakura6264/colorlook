@@ -45,6 +45,7 @@ pub trait Number:
     /// # Returns
     /// A converted value.
     #[must_use]
+    #[allow(dead_code)]
     fn from_u64(n: u64) -> Self;
 
     /// Creates a value from an usize number.
@@ -68,6 +69,7 @@ pub trait Float: Number + Real + Normalize {
     /// # Returns
     /// A converted value.
     #[must_use]
+    #[allow(dead_code)]
     fn from_f32(n: f32) -> Self;
 
     /// Creates a value from a f64 number.
@@ -253,4 +255,3 @@ impl_clamp!(f64);
 
 impl_normalize!(f32);
 impl_normalize!(f64);
-

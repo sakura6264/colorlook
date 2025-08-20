@@ -21,7 +21,7 @@ impl Blocks {
 
 #[derive(Clone)]
 struct BlocksGenerator {
-    data: Vec<Vec<(u8,u8,u8)>>,
+    data: Vec<Vec<(u8, u8, u8)>>,
     width: u32,
     height: u32,
     x_num: u32,
@@ -43,7 +43,7 @@ impl BlocksGenerator {
                 let index = (i * x_num + j) as usize;
                 row.push(match colors.get(index) {
                     Some(color) => (color.r, color.g, color.b),
-                    None => (0,0,0)
+                    None => (0, 0, 0),
                 });
             }
             data.push(row);
@@ -108,7 +108,7 @@ impl super::Generate for Blocks {
                 self.x_num,
                 self.y_num,
             );
-            let buffer = image::RgbImage::from_fn(self.width, self.height, |x,y|{
+            let buffer = image::RgbImage::from_fn(self.width, self.height, |x, y| {
                 let color = gen.get_color(x, y);
                 image::Rgb([color.0, color.1, color.2])
             });

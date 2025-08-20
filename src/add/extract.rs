@@ -1,12 +1,15 @@
 use crate::color_item;
+use crate::utils::auto_palette;
 use eframe::egui;
 use std::sync::mpsc;
 use std::thread;
-use crate::utils::auto_palette;
 
-#[derive(Clone,Copy,PartialEq, Eq)]
+#[derive(Clone, Copy, PartialEq, Eq)]
 pub enum PaletteTheme {
-    Vivid,Muted,Light,Dark
+    Vivid,
+    Muted,
+    Light,
+    Dark,
 }
 
 pub struct Extract {
@@ -62,8 +65,8 @@ impl super::AddColor for Extract {
         ui.horizontal(|ui| {
             ui.label("\u{e9d9} Algorithm:");
             ui.selectable_value(&mut self.algo, auto_palette::Algorithm::GMeans, "GMeans");
-            ui.selectable_value(&mut self.algo, auto_palette::Algorithm::DBSCAN, "DBSCAN").on_hover_text("Slow");
-
+            ui.selectable_value(&mut self.algo, auto_palette::Algorithm::DBSCAN, "DBSCAN")
+                .on_hover_text("Slow");
         });
         ui.horizontal(|ui| {
             if ui.button("\u{ea60} Extract").clicked() && self.hthread.is_none() {
@@ -75,28 +78,40 @@ impl super::AddColor for Extract {
                 let (tx, rx) = mpsc::channel();
                 self.channel = Some(rx);
                 self.hthread = Some(thread::spawn(move || {
-                    let palette: auto_palette::Palette<f64> = auto_palette::Palette::extract_with_algorithm(&img, &algorithm);
+                    let palette: auto_palette::Palette<f64> =
+                        auto_palette::Palette::extract_with_algorithm(&img, &algorithm);
                     let swatches = match theme {
-                        PaletteTheme::Vivid => palette.swatches_with_theme(max_color, &auto_palette::Vivid),
-                        PaletteTheme::Muted => palette.swatches_with_theme(max_color, &auto_palette::Muted),
-                        PaletteTheme::Light => palette.swatches_with_theme(max_color, &auto_palette::Light),
-                        PaletteTheme::Dark => palette.swatches_with_theme(max_color, &auto_palette::Dark),
+                        PaletteTheme::Vivid => {
+                            palette.swatches_with_theme(max_color, &auto_palette::Vivid)
+                        }
+                        PaletteTheme::Muted => {
+                            palette.swatches_with_theme(max_color, &auto_palette::Muted)
+                        }
+                        PaletteTheme::Light => {
+                            palette.swatches_with_theme(max_color, &auto_palette::Light)
+                        }
+                        PaletteTheme::Dark => {
+                            palette.swatches_with_theme(max_color, &auto_palette::Dark)
+                        }
                     };
-                    let mut colors : Vec<color_item::ColorItem> = swatches.iter().map(|swatch| {
-                        let clr = swatch.color().to_rgb();
-                        let pos = swatch.position();
-                        let pop = swatch.population();
-                        let name = format!("{}-({},{})-{}",basename,pos.0,pos.1,pop);
-                        let color = color_item::ColorItem{
-                            name:name,
-                            r: clr.r(),
-                            g: clr.g(),
-                            b: clr.b(),
-                        };
-                        color
-                    }).collect();
+                    let mut colors: Vec<color_item::ColorItem> = swatches
+                        .iter()
+                        .map(|swatch| {
+                            let clr = swatch.color().to_rgb();
+                            let pos = swatch.position();
+                            let pop = swatch.population();
+                            let name = format!("{}-({},{})-{}", basename, pos.0, pos.1, pop);
+                            let color = color_item::ColorItem {
+                                name: name,
+                                r: clr.r(),
+                                g: clr.g(),
+                                b: clr.b(),
+                            };
+                            color
+                        })
+                        .collect();
                     colors.dedup();
-                    colors.sort_by(|a,b| a.name.cmp(&b.name));
+                    colors.sort_by(|a, b| a.name.cmp(&b.name));
                     tx.send(colors).unwrap();
                 }));
             }

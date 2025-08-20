@@ -43,7 +43,7 @@ pub trait Point<F: Float>:
     ///
     /// # Returns
     /// The iterator over the components of this point.
-    fn iter(&self) -> PointIterator<F, Self> {
+    fn iter(&self) -> PointIterator<'_, F, Self> {
         PointIterator::new(self)
     }
 }

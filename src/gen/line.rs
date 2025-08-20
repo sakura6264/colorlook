@@ -3,7 +3,6 @@ use eframe::egui::{self, RichText};
 use std::sync::mpsc;
 use std::thread;
 
-
 pub struct Line {
     positions: Vec<f32>,
     angel: f32,

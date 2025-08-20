@@ -3,16 +3,20 @@ use eframe::egui;
 use crate::color_item;
 
 mod customized;
+mod extract;
 mod picker;
 mod preset;
-mod extract;
 
-lazy_static::lazy_static!{
+lazy_static::lazy_static! {
     pub static ref NAMELIST: Vec<(String,AddColorComponent)> = get_component_namelist();
 }
 
 pub trait AddColor {
-    fn paint_ui(&mut self, ui: &mut egui::Ui, buffer: &image::DynamicImage) -> Option<Vec<color_item::ColorItem>>;
+    fn paint_ui(
+        &mut self,
+        ui: &mut egui::Ui,
+        buffer: &image::DynamicImage,
+    ) -> Option<Vec<color_item::ColorItem>>;
     fn get_name(&self) -> String;
 }
 
@@ -38,7 +42,9 @@ pub fn get_component_namelist() -> Vec<(String, AddColorComponent)> {
     list.push(("\u{f03a} Customized".into(), AddColorComponent::Customized));
     list.push(("\u{f0485} Color Picker".into(), AddColorComponent::Picker));
     list.push(("\u{eb9c} Presets".into(), AddColorComponent::Preset));
-    list.push(("\u{ebac} Extract Palette".into(), AddColorComponent::Extract));
+    list.push((
+        "\u{ebac} Extract Palette".into(),
+        AddColorComponent::Extract,
+    ));
     return list;
 }
-

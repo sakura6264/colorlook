@@ -3,10 +3,10 @@ use image;
 
 use crate::color_item;
 
-mod line;
-mod circle;
-mod mono;
 mod blocks;
+mod circle;
+mod line;
+mod mono;
 
 lazy_static::lazy_static! {
     pub static ref NAMELIST: Vec<(String, GenerateComponent)> = get_component_namelist();

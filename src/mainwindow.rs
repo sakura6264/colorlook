@@ -1,6 +1,7 @@
 use eframe::egui;
 
 use crate::color_item;
+use crate::utils::toast;
 
 const MARGIN: f32 = 40f32;
 const TEXTURE_NAME: &str = "bufferimg";
@@ -147,6 +148,22 @@ impl egui_dock::TabViewer for MainWindowTabViewer {
 }
 
 impl MainWindow {
+    /// Focus on a specific tab, ensuring it's visible in the dock tree
+    /// If the tab doesn't exist, it will be added to the dock tree
+    fn focus_tab(&mut self, tab: Tabs) {
+        // Check if the tab exists in the dock tree
+        match self.dock_tree.find_tab(&tab) {
+            Some(node_index) => {
+                // Tab exists, set it as active
+                self.dock_tree.set_active_tab(node_index);
+            }
+            None => {
+                // Tab doesn't exist, add it to the dock tree
+                self.dock_tree.push_to_focused_leaf(tab);
+            }
+        }
+    }
+
     pub fn new() -> Self {
         let mut tree = egui_dock::DockState::new(vec![Tabs::Preview]);
         let [_, b] = tree.main_surface_mut().split_left(
@@ -325,6 +342,8 @@ impl eframe::App for MainWindow {
                         if ui.button(name).clicked() {
                             self.tab_viewer.add_component =
                                 Some(crate::add::get_component(component.clone()));
+                            // Focus on the Add tab when component changes
+                            self.focus_tab(Tabs::Add);
                         }
                     }
                 });
@@ -333,6 +352,8 @@ impl eframe::App for MainWindow {
                         if ui.button(name).clicked() {
                             self.tab_viewer.gen_component =
                                 Some(crate::gen::get_component(component.clone()));
+                            // Focus on the Generate tab when component changes
+                            self.focus_tab(Tabs::Gen);
                         }
                     }
                 });
@@ -360,29 +381,14 @@ impl eframe::App for MainWindow {
             FileDialog::LoadImg(dlg) => {
                 if dlg.show(ctx).selected() {
                     if let Some(path) = dlg.path() {
-                        match image::open(path) {
-                            Ok(img) => {
-                                self.tab_viewer.image = img;
-                                self.tab_viewer.update_texture(ctx);
-                                self.toasts.add(egui_toast::Toast {
-                                    kind: egui_toast::ToastKind::Success,
-                                    text: format!("Loaded Image from {}", path.display()).into(),
-                                    options: egui_toast::ToastOptions::default()
-                                        .duration_in_seconds(2f64)
-                                        .show_progress(true),
-                                    style: egui_toast::ToastStyle::default(),
-                                });
-                            }
-                            Err(e) => {
-                                self.toasts.add(egui_toast::Toast {
-                                    kind: egui_toast::ToastKind::Error,
-                                    text: format!("Error: {}", e).into(),
-                                    options: egui_toast::ToastOptions::default()
-                                        .duration_in_seconds(5f64)
-                                        .show_progress(true),
-                                    style: egui_toast::ToastStyle::default(),
-                                });
-                            }
+                        if let Some(img) = toast::handle_result(
+                            image::open(path),
+                            format!("Loaded Image from {}", path.display()),
+                            "Error loading image",
+                            &mut self.toasts,
+                        ) {
+                            self.tab_viewer.image = img;
+                            self.tab_viewer.update_texture(ctx);
                         }
                     }
                 }
@@ -390,103 +396,51 @@ impl eframe::App for MainWindow {
             FileDialog::SaveImg(dlg) => {
                 if dlg.show(ctx).selected() {
                     if let Some(path) = dlg.path() {
-                        if let Err(e) = self.tab_viewer.image.save(path) {
-                            self.toasts.add(egui_toast::Toast {
-                                kind: egui_toast::ToastKind::Error,
-                                text: format!("Error: {}", e).into(),
-                                options: egui_toast::ToastOptions::default()
-                                    .duration_in_seconds(5f64)
-                                    .show_progress(true),
-                                style: egui_toast::ToastStyle::default(),
-                            });
-                        } else {
-                            self.toasts.add(egui_toast::Toast {
-                                kind: egui_toast::ToastKind::Success,
-                                text: format!("Saved PNG to {}", path.display()).into(),
-                                options: egui_toast::ToastOptions::default()
-                                    .duration_in_seconds(2f64)
-                                    .show_progress(true),
-                                style: egui_toast::ToastStyle::default(),
-                            });
-                        };
+                        toast::handle_result(
+                            self.tab_viewer.image.save(path),
+                            format!("Saved PNG to {}", path.display()),
+                            "Error saving image",
+                            &mut self.toasts,
+                        );
                     }
                 }
             }
             FileDialog::ExportJson(dlg) => {
                 if dlg.show(ctx).selected() {
                     if let Some(path) = dlg.path() {
-                        let mut err = None;
-                        match serde_json::to_string(&self.tab_viewer.colors) {
-                            Ok(str) => match std::fs::write(path, str) {
-                                Ok(_) => {}
-                                Err(e) => {
-                                    err = Some(e.to_string());
-                                }
-                            },
-                            Err(e) => {
-                                err = Some(e.to_string());
-                            }
-                        }
-                        if let Some(e) = err {
-                            self.toasts.add(egui_toast::Toast {
-                                kind: egui_toast::ToastKind::Error,
-                                text: format!("Error Write JSON: {}", e).into(),
-                                options: egui_toast::ToastOptions::default()
-                                    .duration_in_seconds(5f64)
-                                    .show_progress(true),
-                                style: egui_toast::ToastStyle::default(),
+                        // Handle the two different error types separately
+                        let result = serde_json::to_string(&self.tab_viewer.colors)
+                            .map_err(|e| format!("JSON serialization error: {}", e))
+                            .and_then(|json_str| {
+                                std::fs::write(path, json_str)
+                                    .map_err(|e| format!("File write error: {}", e))
                             });
-                        } else {
-                            self.toasts.add(egui_toast::Toast {
-                                kind: egui_toast::ToastKind::Success,
-                                text: format!("Exported JSON to {}", path.display()).into(),
-                                options: egui_toast::ToastOptions::default()
-                                    .duration_in_seconds(2f64)
-                                    .show_progress(true),
-                                style: egui_toast::ToastStyle::default(),
-                            });
-                        };
+
+                        toast::handle_result(
+                            result,
+                            format!("Exported JSON to {}", path.display()),
+                            "Error writing JSON",
+                            &mut self.toasts,
+                        );
                     }
                 }
             }
             FileDialog::ImportJson(dlg) => {
                 if dlg.show(ctx).selected() {
                     if let Some(path) = dlg.path() {
-                        let mut err = None;
-                        match std::fs::read_to_string(path) {
-                            Ok(str) => {
-                                match serde_json::from_str::<Vec<color_item::ColorItem>>(&str) {
-                                    Ok(mut color) => {
-                                        self.tab_viewer.colors.append(&mut color);
-                                    }
-                                    Err(e) => {
-                                        err = Some(e.to_string());
-                                    }
-                                }
-                            }
-                            Err(e) => {
-                                err = Some(e.to_string());
-                            }
+                        let result = std::fs::read_to_string(path).and_then(|content| {
+                            serde_json::from_str::<Vec<color_item::ColorItem>>(&content)
+                                .map_err(|e| e.into())
+                        });
+
+                        if let Some(colors) = toast::handle_result(
+                            result,
+                            format!("Imported JSON from {}", path.display()),
+                            "Error reading JSON",
+                            &mut self.toasts,
+                        ) {
+                            self.tab_viewer.colors.extend(colors);
                         }
-                        if let Some(e) = err {
-                            self.toasts.add(egui_toast::Toast {
-                                kind: egui_toast::ToastKind::Error,
-                                text: format!("\u{e654} Error Read JSON: {e}").into(),
-                                options: egui_toast::ToastOptions::default()
-                                    .duration_in_seconds(5f64)
-                                    .show_progress(true),
-                                style: egui_toast::ToastStyle::default(),
-                            });
-                        } else {
-                            self.toasts.add(egui_toast::Toast {
-                                kind: egui_toast::ToastKind::Success,
-                                text: format!("Imported JSON from {}", path.display()).into(),
-                                options: egui_toast::ToastOptions::default()
-                                    .duration_in_seconds(2f64)
-                                    .show_progress(true),
-                                style: egui_toast::ToastStyle::default(),
-                            });
-                        };
                     }
                 }
             }

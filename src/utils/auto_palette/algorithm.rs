@@ -16,7 +16,7 @@ use super::math::point::Point;
 /// let palette = Palette::extract_with_algorithm(&image, &Algorithm::GMeans);
 /// let palette = Palette::extract_with_algorithm(&image, &Algorithm::DBSCAN);
 /// ```
-#[derive(Debug,Clone,Copy,PartialEq,Eq)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum Algorithm {
     /// G-means clustering algorithm.
     GMeans,

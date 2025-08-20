@@ -3,7 +3,6 @@ use eframe::egui::{self, RichText};
 use std::sync::mpsc;
 use std::thread;
 
-
 pub struct Circle {
     positions: Vec<f32>,
     width: u32,
@@ -210,8 +209,7 @@ impl super::Generate for Circle {
                 let radius = width * pos / 2f32;
                 if radius < stroke.width {
                     painter.circle_filled(center_pos, stroke.width / 2f32, stroke.color);
-                }
-                else {
+                } else {
                     painter.circle_stroke(center_pos, radius, stroke);
                 }
             }

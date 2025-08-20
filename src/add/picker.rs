@@ -19,7 +19,11 @@ impl super::AddColor for Picker {
     fn get_name(&self) -> String {
         return "\u{eae6} Color Picker".into();
     }
-    fn paint_ui(&mut self, ui: &mut egui::Ui, _buffer:&image::DynamicImage) -> Option<Vec<color_item::ColorItem>> {
+    fn paint_ui(
+        &mut self,
+        ui: &mut egui::Ui,
+        _buffer: &image::DynamicImage,
+    ) -> Option<Vec<color_item::ColorItem>> {
         let mut ret = None;
         ui.horizontal(|ui| {
             ui.label("\u{f1050} Name:");

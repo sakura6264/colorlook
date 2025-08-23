@@ -30,7 +30,7 @@ impl DistanceMetric {
 }
 
 #[inline]
-#[must_use]
+
 fn squared_euclidean<F: Float, P: Point<F>>(point1: &P, point2: &P) -> F {
     point1
         .iter()

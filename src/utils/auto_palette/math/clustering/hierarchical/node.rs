@@ -37,7 +37,7 @@ where
     /// # Returns
     /// A new `Node` instance.
     #[inline]
-    #[must_use]
+
     pub fn new(label: usize, node1: Option<usize>, node2: Option<usize>, distance: F) -> Self {
         Self {
             label,

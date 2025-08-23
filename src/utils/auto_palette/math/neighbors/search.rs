@@ -20,7 +20,7 @@ where
     ///
     /// # Returns
     /// A `Vec` of the k-nearest neighbors.
-    #[must_use]
+
     fn search(&self, query: &P, k: usize) -> Vec<Neighbor<F>>;
 
     /// Search for the nearest neighbor of the given point.
@@ -30,7 +30,7 @@ where
     ///
     /// # Returns
     /// An `Option` of the nearest neighbor.
-    #[must_use]
+
     fn search_nearest(&self, query: &P) -> Option<Neighbor<F>>;
 
     /// Searches for all neighbors within the given radius of a given point.
@@ -41,6 +41,6 @@ where
     ///
     /// # Returns
     /// A `Vec` of all neighbors within the given radius.
-    #[must_use]
+
     fn search_radius(&self, query: &P, radius: F) -> Vec<Neighbor<F>>;
 }

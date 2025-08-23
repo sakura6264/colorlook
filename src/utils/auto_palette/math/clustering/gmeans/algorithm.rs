@@ -43,7 +43,7 @@ where
     ///
     /// # Returns
     /// A new `Gmeans` instance.
-    #[must_use]
+
     pub fn new(
         max_k: usize,
         max_iter: usize,
@@ -64,7 +64,6 @@ where
         }
     }
 
-    #[must_use]
     fn split<P: Point<F>>(
         &self,
         cluster: &Cluster<F, P>,
@@ -88,7 +87,6 @@ where
         (clusters[0].clone(), clusters[1].clone())
     }
 
-    #[must_use]
     fn assign<P: Point<F>>(
         &self,
         clusters: &mut [Cluster<F, P>],
@@ -132,7 +130,6 @@ where
 {
     type Output = Vec<Cluster<F, P>>;
 
-    #[must_use]
     fn fit(&self, points: &[P]) -> Self::Output {
         if points.is_empty() {
             return Vec::new();

@@ -20,7 +20,7 @@ where
     ///
     /// # Returns
     /// A new `Priority` instance.
-    #[must_use]
+
     pub fn new(item: T, priority: P) -> Self {
         Self(item, priority)
     }

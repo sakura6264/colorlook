@@ -37,7 +37,7 @@ where
     /// # Returns
     /// A new `LinearSearch` instance.
     #[allow(unused)]
-    #[must_use]
+
     pub fn new(points: &'a Vec<P>, metric: &'a DistanceMetric) -> Self {
         Self {
             points: Cow::Borrowed(points),
@@ -52,7 +52,6 @@ where
     F: Float,
     P: Point<F>,
 {
-    #[must_use]
     fn search(&self, query: &P, k: usize) -> Vec<Neighbor<F>> {
         if k == 0 {
             return Vec::new();
@@ -78,12 +77,10 @@ where
         neighbors
     }
 
-    #[must_use]
     fn search_nearest(&self, query: &P) -> Option<Neighbor<F>> {
         self.search(query, 1).pop()
     }
 
-    #[must_use]
     fn search_radius(&self, query: &P, radius: F) -> Vec<Neighbor<F>> {
         if radius < F::zero() {
             return Vec::new();

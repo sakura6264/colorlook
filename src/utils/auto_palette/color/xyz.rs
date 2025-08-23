@@ -37,7 +37,7 @@ where
     /// # Returns
     /// A new XYZ color.
     #[inline]
-    #[must_use]
+
     pub fn new(x: F, y: F, z: F) -> XYZ<F, WP> {
         Self {
             x: Self::clamp_x(x),
@@ -52,7 +52,7 @@ where
     /// # Returns
     /// The min value of x.
     #[inline]
-    #[must_use]
+
     pub(crate) fn min_x<T: Float>() -> T {
         T::from_f64(0.0)
     }
@@ -62,7 +62,7 @@ where
     /// # Returns
     /// The max value of x.
     #[inline]
-    #[must_use]
+
     pub(crate) fn max_x<T: Float>() -> T {
         T::from_f64(0.950456)
     }
@@ -72,7 +72,7 @@ where
     /// # Returns
     /// The min value of y.
     #[inline]
-    #[must_use]
+
     pub(crate) fn min_y<T: Float>() -> T {
         T::from_f64(0.0)
     }
@@ -82,7 +82,7 @@ where
     /// # Returns
     /// The max value of y.
     #[inline]
-    #[must_use]
+
     pub(crate) fn max_y<T: Float>() -> T {
         T::from_f64(1.0)
     }
@@ -92,7 +92,7 @@ where
     /// # Returns
     /// The min value of z.
     #[inline]
-    #[must_use]
+
     pub(crate) fn min_z<T: Float>() -> T {
         T::from_f64(0.0)
     }
@@ -102,25 +102,25 @@ where
     /// # Returns
     /// The max value of z.
     #[inline]
-    #[must_use]
+
     pub(crate) fn max_z<T: Float>() -> T {
         T::from_f64(1.088644)
     }
 
     #[inline]
-    #[must_use]
+
     fn clamp_x(value: F) -> F {
         value.clamp(Self::min_x(), Self::max_x())
     }
 
     #[inline]
-    #[must_use]
+
     fn clamp_y(value: F) -> F {
         value.clamp(Self::min_y(), Self::max_y())
     }
 
     #[inline]
-    #[must_use]
+
     fn clamp_z(value: F) -> F {
         value.clamp(Self::min_z(), Self::max_z())
     }
@@ -149,7 +149,7 @@ where
     WP: WhitePoint<F>,
 {
     #[inline]
-    #[must_use]
+
     fn from(rgb: &RGB) -> Self {
         let f = |value: F| -> F {
             if value <= F::from_f64(0.04045) {
@@ -177,7 +177,7 @@ where
     WP: WhitePoint<F>,
 {
     #[inline]
-    #[must_use]
+
     fn from(lab: &Lab<F, WP>) -> Self {
         let epsilon = F::from_f64(6.0 / 29.0);
         let kappa = F::from_f64(108.0 / 841.0); // 3.0 * ((6.0 / 29.0) ^ 2)

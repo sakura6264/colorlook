@@ -30,7 +30,7 @@ where
     ///
     /// # Returns
     /// A new `Cluster` instance.
-    #[must_use]
+
     pub fn new(initial_centroid: P) -> Self {
         Self {
             centroid: initial_centroid,
@@ -43,7 +43,7 @@ where
     ///
     /// # Returns
     /// A reference to the centroid of this cluster.
-    #[must_use]
+
     pub fn centroid(&self) -> &P {
         &self.centroid
     }
@@ -52,7 +52,7 @@ where
     ///
     /// # Returns
     /// `true` if this cluster is empty.
-    #[must_use]
+
     pub fn is_empty(&self) -> bool {
         self.membership.is_empty()
     }
@@ -61,7 +61,7 @@ where
     ///
     /// # Returns
     /// The number of points in this cluster.
-    #[must_use]
+
     pub fn size(&self) -> usize {
         self.membership.len()
     }
@@ -70,7 +70,7 @@ where
     ///
     /// # Returns
     /// A reference to the membership of this cluster.
-    #[must_use]
+
     pub fn membership(&self) -> &[usize] {
         &self.membership
     }
@@ -102,7 +102,6 @@ where
     F: Float,
     P: Point<F>,
 {
-    #[must_use]
     fn default() -> Self {
         Self {
             centroid: P::zero(),

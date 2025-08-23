@@ -37,7 +37,7 @@ where
     ///
     /// # Returns
     /// A new `DBSCAN` instance.
-    #[must_use]
+
     pub fn new(min_samples: usize, epsilon: F, metric: &'a DistanceMetric) -> Self {
         Self {
             min_samples,
@@ -101,7 +101,6 @@ where
 {
     type Output = (Vec<Cluster<F, P>>, HashSet<usize>);
 
-    #[must_use]
     fn fit(&self, points: &[P]) -> Self::Output {
         if points.is_empty() {
             return (Vec::new(), HashSet::new());

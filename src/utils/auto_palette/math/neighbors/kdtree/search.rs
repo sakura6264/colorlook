@@ -38,7 +38,7 @@ where
     ///
     /// # Returns
     /// A new `KDTreeSearch` instance.
-    #[must_use]
+
     pub fn new(points: &'a [P], metric: &'a DistanceMetric) -> Self {
         let mut indices: Vec<usize> = (0..points.len()).collect();
         let root = Self::build_node(points, &mut indices, 0);
@@ -52,7 +52,7 @@ where
     }
 
     #[inline]
-    #[must_use]
+
     fn partition_by_key<V, T>(slice: &mut [T], value_fn: &V) -> usize
     where
         T: Ord,
@@ -81,7 +81,7 @@ where
     }
 
     #[inline]
-    #[must_use]
+
     fn find_nth_index<T, V>(slice: &mut [T], n: usize, value_fn: V) -> usize
     where
         T: Ord,
@@ -107,7 +107,7 @@ where
     }
 
     #[inline]
-    #[must_use]
+
     fn build_node(points: &[P], indices: &mut [usize], depth: usize) -> Option<KDNode> {
         if indices.is_empty() {
             return None;
@@ -179,7 +179,7 @@ where
     }
 
     #[inline]
-    #[must_use]
+
     fn search_nearest_recursively(
         &self,
         root: &Option<Box<KDNode>>,
@@ -255,7 +255,6 @@ where
     F: Float,
     P: Point<F>,
 {
-    #[must_use]
     fn search(&self, query: &P, k: usize) -> Vec<Neighbor<F>> {
         if k == 0 {
             return Vec::new();
@@ -272,12 +271,10 @@ where
         neighbors.into_iter().take(k).collect()
     }
 
-    #[must_use]
     fn search_nearest(&self, query: &P) -> Option<Neighbor<F>> {
         self.search_nearest_recursively(&self.root, query, None)
     }
 
-    #[must_use]
     fn search_radius(&self, query: &P, radius: F) -> Vec<Neighbor<F>> {
         if radius < F::zero() {
             return Vec::new();

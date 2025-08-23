@@ -20,6 +20,6 @@ where
     ///
     /// # Returns
     /// A fitted output.
-    #[must_use]
+
     fn fit(&self, points: &[P]) -> Self::Output;
 }

@@ -1,5 +1,4 @@
 #![windows_subsystem = "windows"]
-#![allow(unused_attributes)]
 mod add;
 mod color_item;
 mod gen;
@@ -34,7 +33,7 @@ fn main() {
         option,
         Box::new(|cc| {
             // Configure fonts using the utility function
-            fonts::configure_fonts(&cc.egui_ctx, NERDFONTS.to_vec(), HACKFONT.to_vec());
+            fonts::configure_fonts(&cc.egui_ctx, &NERDFONTS, &HACKFONT);
             cc.egui_ctx.set_theme(egui::Theme::Dark);
             Ok(Box::new(mainwindow::MainWindow::new()))
         }),

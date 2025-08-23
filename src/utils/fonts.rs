@@ -1,18 +1,22 @@
 use eframe::egui;
 
 /// Configure fonts for the application
-pub fn configure_fonts(ctx: &egui::Context, nerd_font_data: Vec<u8>, hack_font_data: Vec<u8>) {
+pub fn configure_fonts(
+    ctx: &egui::Context,
+    nerd_font_data: &'static [u8],
+    hack_font_data: &'static [u8],
+) {
     let mut fonts = egui::FontDefinitions::default();
 
     // Add font data
     fonts.font_data.insert(
         "nerdfonts".to_string(),
-        egui::FontData::from_owned(nerd_font_data),
+        egui::FontData::from_static(nerd_font_data),
     );
 
     fonts.font_data.insert(
         "hackfont".to_string(),
-        egui::FontData::from_owned(hack_font_data),
+        egui::FontData::from_static(hack_font_data),
     );
 
     // Configure font families
@@ -55,11 +59,13 @@ fn add_font_to_family(
 pub fn create_app_icon(icon_data: &[u8]) -> egui::IconData {
     let icon_img = image::load_from_memory(icon_data).expect("Failed to load icon");
     let icon_buffer = icon_img.to_rgba8();
-    let icon_pixels = icon_buffer.as_flat_samples();
+    let (width, height) = (icon_img.width(), icon_img.height());
+    // into_raw consumes the buffer and returns the RGBA bytes without an extra copy
+    let rgba = icon_buffer.into_raw();
 
     egui::IconData {
-        rgba: icon_pixels.to_vec().samples,
-        width: icon_img.width(),
-        height: icon_img.height(),
+        rgba,
+        width,
+        height,
     }
 }

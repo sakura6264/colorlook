@@ -26,7 +26,7 @@ num-traits = "*"
 statrs     = "*"
 
 [build-dependencies]
-embed-resource = "*"
+winres = "*"
 
 [profile.release]
 strip = true

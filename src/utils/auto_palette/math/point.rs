@@ -68,7 +68,7 @@ impl<'a, F: Float, P: Point<F>> PointIterator<'a, F, P> {
     /// # Returns
     /// A new `PointIterator` instance.
     #[inline]
-    #[must_use]
+
     fn new(point: &'a P) -> Self {
         Self {
             point,
@@ -82,7 +82,7 @@ impl<'a, F: Float, P: Point<F>> Iterator for PointIterator<'a, F, P> {
     type Item = F;
 
     #[inline]
-    #[must_use]
+
     fn next(&mut self) -> Option<Self::Item> {
         if self.index >= self.point.dimension() {
             return None;
@@ -108,7 +108,7 @@ where
     type Output = F;
 
     #[inline]
-    #[must_use]
+
     fn index(&self, index: usize) -> &Self::Output {
         match index {
             0 => &self.0,
@@ -136,7 +136,7 @@ where
     type Output = F;
 
     #[inline]
-    #[must_use]
+
     fn index(&self, index: usize) -> &Self::Output {
         match index {
             0 => &self.0,
@@ -191,13 +191,13 @@ macro_rules! impl_point {
 
     impl<F> Point<F> for $Point<F> where F: Float {
         #[inline]
-        #[must_use]
+
         fn dimension(&self) -> usize {
            $size
         }
 
         #[inline]
-        #[must_use]
+
         fn dot(&self, other: &Self) -> F {
             let mut sum = F::zero();
             for i in 0..self.dimension() {
@@ -209,13 +209,13 @@ macro_rules! impl_point {
 
     impl<F> Zero for $Point<F> where F: Float {
         #[inline]
-        #[must_use]
+
         fn zero() -> Self {
             Self { $($field: F::zero()),+ }
         }
 
         #[inline]
-        #[must_use]
+
         fn is_zero(&self) -> bool {
             $(self.$field.is_zero()) &&+
         }

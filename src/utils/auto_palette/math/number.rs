@@ -24,7 +24,7 @@ pub trait Number:
     ///
     /// # Returns
     /// A converted value.
-    #[must_use]
+
     fn from_u8(n: u8) -> Self;
 
     /// Creates a value from an u32 number.
@@ -34,7 +34,7 @@ pub trait Number:
     ///
     /// # Returns
     /// A converted value.
-    #[must_use]
+
     fn from_u32(n: u32) -> Self;
 
     /// Creates a value from an u64 number.
@@ -44,7 +44,7 @@ pub trait Number:
     ///
     /// # Returns
     /// A converted value.
-    #[must_use]
+
     #[allow(dead_code)]
     fn from_u64(n: u64) -> Self;
 
@@ -55,7 +55,7 @@ pub trait Number:
     ///
     /// # Returns
     /// A converted value.
-    #[must_use]
+
     fn from_usize(n: usize) -> Self;
 }
 
@@ -68,7 +68,7 @@ pub trait Float: Number + Real + Normalize {
     ///
     /// # Returns
     /// A converted value.
-    #[must_use]
+
     #[allow(dead_code)]
     fn from_f32(n: f32) -> Self;
 
@@ -79,7 +79,7 @@ pub trait Float: Number + Real + Normalize {
     ///
     /// # Returns
     /// A converted value.
-    #[must_use]
+
     fn from_f64(n: f64) -> Self;
 }
 
@@ -93,7 +93,7 @@ pub trait Clamp {
     ///
     /// # Returns
     /// The clamped value.
-    #[must_use]
+
     fn clamp(self, min: Self, max: Self) -> Self;
 }
 
@@ -142,7 +142,7 @@ where
     /// # Returns
     /// A new fraction value.
     #[inline]
-    #[must_use]
+
     pub fn new(value: F) -> Self {
         Self {
             value: value.clamp(F::zero(), F::one()),
@@ -154,7 +154,7 @@ where
     /// # Returns
     /// The value of the fraction.
     #[inline]
-    #[must_use]
+
     pub fn value(&self) -> F {
         self.value
     }

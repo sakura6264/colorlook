@@ -48,7 +48,7 @@ pub fn standardize<F: Float>(x: &mut [F]) {
 /// # References
 /// * [Anderson-Darling Test](https://en.wikipedia.org/wiki/Anderson%E2%80%93Darling_test)
 #[inline]
-#[must_use]
+
 pub fn anderson_darling_test<F: Float>(x: &[F]) -> Option<F> {
     if x.is_empty() {
         return None;

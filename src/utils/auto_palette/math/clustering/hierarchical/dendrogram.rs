@@ -26,7 +26,7 @@ where
     ///
     /// # Returns
     /// A new `Dendrogram` instance.
-    #[must_use]
+
     pub fn new(capacity: usize) -> Self {
         Self {
             nodes: Vec::with_capacity(capacity),
@@ -37,7 +37,7 @@ where
     ///
     /// # Returns
     /// The number of nodes in this dendrogram.
-    #[must_use]
+
     pub fn len(&self) -> usize {
         self.nodes.len()
     }
@@ -46,7 +46,7 @@ where
     ///
     /// # Returns
     /// A reference to the nodes of this dendrogram.
-    #[must_use]
+
     pub fn nodes(&self) -> &[Node<F>] {
         &self.nodes
     }
@@ -68,7 +68,7 @@ where
     ///
     /// # Returns
     /// A vector of nodes representing the clusters.
-    #[must_use]
+
     pub fn partition(&self, n: usize) -> Vec<Node<F>> {
         let mut heap = BinaryHeap::new();
         if let Some(node) = self.nodes.last() {

@@ -27,7 +27,7 @@ where
     ///
     /// # Returns
     /// A new `HierarchicalClustering` instance.
-    #[must_use]
+
     pub fn new() -> Self {
         Self {
             _marker: PhantomData,
@@ -47,7 +47,7 @@ where
     /// * `T` - The type of the elements in the dataset.
     /// * `DF` - The type of the distance function.
     #[allow(unused)]
-    #[must_use]
+
     pub fn fit<T, DF>(&self, dataset: &'a [T], distance_fn: &'a DF) -> Dendrogram<F>
     where
         DF: Fn(&T, &T) -> F,
@@ -66,7 +66,7 @@ where
     ///
     /// # Type Parameters
     /// * `T` - The type of the elements in the dataset.
-    #[must_use]
+
     pub fn fit_with_linkage<T>(
         &self,
         dataset: &'a [T],

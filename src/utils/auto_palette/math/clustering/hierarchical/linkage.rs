@@ -17,7 +17,7 @@ where
     ///
     /// # Returns
     /// The distance between the dataset with the given indices.
-    #[must_use]
+
     fn distance(&self, i: usize, j: usize) -> F;
 
     /// Merges the dataset with the given indices.
@@ -28,7 +28,7 @@ where
     ///
     /// # Returns
     /// The new label of the merged dataset.
-    #[must_use]
+
     fn merge(&mut self, i: usize, j: usize) -> usize;
 }
 
@@ -61,7 +61,7 @@ where
     /// # Type Parameters
     /// * `T` - The type of the elements in the dataset.
     /// * `DF` - The type of the distance function.
-    #[must_use]
+
     fn new<'a, T, DF>(dataset: &'a [T], distance_fn: &'a DF) -> Self
     where
         DF: Fn(&T, &T) -> F,
@@ -89,7 +89,7 @@ where
     /// # Returns
     /// The distance between the dataset with the given indices.
     #[inline]
-    #[must_use]
+
     fn get(&self, i: usize, j: usize) -> F {
         let index = self.index(i, j);
         self.distances[index]
@@ -118,7 +118,7 @@ where
     /// # Panics
     /// Panics if `i` or `j` is out of range.
     #[inline]
-    #[must_use]
+
     fn index(&self, i: usize, j: usize) -> usize {
         assert!(
             i < self.size,
@@ -162,7 +162,7 @@ where
     ///
     /// # Type Parameters
     /// * `T` - The type of points.
-    #[must_use]
+
     pub fn new<'a, T, DF>(points: &'a [T], distance_fn: &'a DF) -> Self
     where
         DF: Fn(&T, &T) -> F,
@@ -180,7 +180,7 @@ where
     F: Float,
 {
     #[inline]
-    #[must_use]
+
     fn distance(&self, i: usize, j: usize) -> F {
         if self.inactive.contains(&i) || self.inactive.contains(&j) {
             return F::max_value();
@@ -189,7 +189,7 @@ where
     }
 
     #[inline]
-    #[must_use]
+
     fn merge(&mut self, i: usize, j: usize) -> usize {
         assert!(i < j, "i must be less than j: {} < {}", i, j);
 
@@ -237,7 +237,7 @@ where
     /// # Type Parameters
     /// * `T` - The type of the elements in the dataset.
     /// * `DF` - The type of the distance function.
-    #[must_use]
+
     pub fn new<'a, T, DF>(dataset: &'a [T], distance_fn: &'a DF) -> Self
     where
         DF: Fn(&T, &T) -> F,
@@ -255,7 +255,7 @@ where
     F: Float,
 {
     #[inline]
-    #[must_use]
+
     fn distance(&self, i: usize, j: usize) -> F {
         if self.inactive.contains(&i) || self.inactive.contains(&j) {
             return F::max_value();
@@ -264,7 +264,7 @@ where
     }
 
     #[inline]
-    #[must_use]
+
     fn merge(&mut self, i: usize, j: usize) -> usize {
         assert!(i < j, "i must be less than j: {} < {}", i, j);
 

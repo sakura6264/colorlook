@@ -60,7 +60,7 @@ impl LineGenerator {
                 continue;
             }
         }
-        return (0, 0, 0);
+        (0, 0, 0)
     }
 }
 
@@ -103,7 +103,7 @@ impl Line {
 
 impl super::Generate for Line {
     fn get_name(&self) -> String {
-        return "\u{eae6} Line".into();
+        "\u{eae6} Line".into()
     }
     fn paint_ui(
         &mut self,
@@ -147,8 +147,8 @@ impl super::Generate for Line {
                 let thread_colors = colors.clone();
                 let thread_positions = self.positions.clone();
                 let thread_angel = self.angel.to_radians();
-                let thread_width = self.width.clone();
-                let thread_height = self.height.clone();
+                let thread_width = self.width;
+                let thread_height = self.height;
                 let (tx, rx) = mpsc::channel();
                 self.channel = Some(rx);
                 self.hthread = Some(thread::spawn(move || {
@@ -204,7 +204,7 @@ impl super::Generate for Line {
                     stroke,
                 );
             }
-            return highlight;
+            highlight
         });
         if let Some(hl) = highlight.inner {
             ui.label(
@@ -231,6 +231,6 @@ impl super::Generate for Line {
                 self.channel = None;
             }
         }
-        return None;
+        None
     }
 }

@@ -1,5 +1,4 @@
 use eframe::egui;
-use image;
 
 use crate::color_item;
 
@@ -44,5 +43,5 @@ pub fn get_component_namelist() -> Vec<(String, GenerateComponent)> {
     list.push(("\u{f0e96} Circle".into(), GenerateComponent::Circle));
     list.push(("\u{eae6} Mono".into(), GenerateComponent::Mono));
     list.push(("\u{f0763} Blocks".into(), GenerateComponent::Blocks));
-    return list;
+    list
 }

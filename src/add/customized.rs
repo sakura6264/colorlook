@@ -50,7 +50,7 @@ impl Customized {
 
 impl super::AddColor for Customized {
     fn get_name(&self) -> String {
-        return "\u{eae6} Customized Color".into();
+        "\u{eae6} Customized Color".into()
     }
     fn paint_ui(
         &mut self,
@@ -174,6 +174,6 @@ impl super::AddColor for Customized {
         if ret {
             return Some(vec![color]);
         }
-        return None;
+        None
     }
 }

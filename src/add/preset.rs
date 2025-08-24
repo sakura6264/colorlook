@@ -41,7 +41,7 @@ impl Preset {
                 }
             }
         }
-        return Ok(colorlist);
+        Ok(colorlist)
     }
     pub fn new() -> Self {
         let (colorlist, msg) = match Self::load_colorlist() {
@@ -91,53 +91,51 @@ impl Preset {
                         let text = color.name.clone();
                         if select.is_empty() {
                             ui.label(egui::RichText::new(text));
-                        } else {
-                            if let Ok(reg) = regex::Regex::new(select) {
-                                if let Some(mat) = reg.find(&text) {
-                                    let match_start = mat.start();
-                                    let match_end = mat.end();
-                                    let len = text.len();
-                                    let style = ui.style();
-                                    let mut job = egui::text::LayoutJob::default();
-                                    egui::RichText::new(&text[0..match_start])
-                                        .color(egui::Color32::YELLOW)
-                                        .append_to(
-                                            &mut job,
-                                            style,
-                                            egui::FontSelection::Default,
-                                            egui::Align::Center,
-                                        );
-                                    egui::RichText::new(&text[match_start..match_end])
-                                        .color(egui::Color32::GREEN)
-                                        .append_to(
-                                            &mut job,
-                                            style,
-                                            egui::FontSelection::Default,
-                                            egui::Align::Center,
-                                        );
-                                    egui::RichText::new(&text[match_end..len])
-                                        .color(egui::Color32::YELLOW)
-                                        .append_to(
-                                            &mut job,
-                                            style,
-                                            egui::FontSelection::Default,
-                                            egui::Align::Center,
-                                        );
-                                    ui.label(job);
-                                    selected = true;
-                                } else {
-                                    ui.label(text);
-                                }
+                        } else if let Ok(reg) = regex::Regex::new(select) {
+                            if let Some(mat) = reg.find(&text) {
+                                let match_start = mat.start();
+                                let match_end = mat.end();
+                                let len = text.len();
+                                let style = ui.style();
+                                let mut job = egui::text::LayoutJob::default();
+                                egui::RichText::new(&text[0..match_start])
+                                    .color(egui::Color32::YELLOW)
+                                    .append_to(
+                                        &mut job,
+                                        style,
+                                        egui::FontSelection::Default,
+                                        egui::Align::Center,
+                                    );
+                                egui::RichText::new(&text[match_start..match_end])
+                                    .color(egui::Color32::GREEN)
+                                    .append_to(
+                                        &mut job,
+                                        style,
+                                        egui::FontSelection::Default,
+                                        egui::Align::Center,
+                                    );
+                                egui::RichText::new(&text[match_end..len])
+                                    .color(egui::Color32::YELLOW)
+                                    .append_to(
+                                        &mut job,
+                                        style,
+                                        egui::FontSelection::Default,
+                                        egui::Align::Center,
+                                    );
+                                ui.label(job);
+                                selected = true;
                             } else {
                                 ui.label(text);
                             }
+                        } else {
+                            ui.label(text);
                         }
                         ui.separator();
                         ui.label(
-                            egui::RichText::new(&color.get_hex())
+                            egui::RichText::new(color.get_hex())
                                 .color(color.get_full_value_color32()),
                         );
-                        return response;
+                        response
                     })
                     .inner;
                 ui.horizontal(|ui| {
@@ -158,16 +156,16 @@ impl Preset {
                         });
                     }
                 });
-                return response;
+                response
             })
             .inner;
-        return (add, selected, response);
+        (add, selected, response)
     }
 }
 
 impl super::AddColor for Preset {
     fn get_name(&self) -> String {
-        return "\u{eae6} Preset Color".into();
+        "\u{eae6} Preset Color".into()
     }
     fn paint_ui(
         &mut self,
@@ -249,11 +247,9 @@ impl super::AddColor for Preset {
                                 selected_vec[selected_vec.len() - 1]
                                     .scroll_to_me(Some(egui::Align::Center));
                             }
-                        } else {
-                            if focused {
-                                selected_vec[self.selected_index]
-                                    .scroll_to_me(Some(egui::Align::Center));
-                            }
+                        } else if focused {
+                            selected_vec[self.selected_index]
+                                .scroll_to_me(Some(egui::Align::Center));
                         }
                     } else {
                         self.selected_index = 0;
@@ -263,6 +259,6 @@ impl super::AddColor for Preset {
         if colorvec.is_empty() {
             return None;
         }
-        return Some(colorvec);
+        Some(colorvec)
     }
 }

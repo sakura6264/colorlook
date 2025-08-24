@@ -17,7 +17,7 @@ impl Picker {
 
 impl super::AddColor for Picker {
     fn get_name(&self) -> String {
-        return "\u{eae6} Color Picker".into();
+        "\u{eae6} Color Picker".into()
     }
     fn paint_ui(
         &mut self,
@@ -43,6 +43,6 @@ impl super::AddColor for Picker {
             &mut self.color,
             egui::color_picker::Alpha::Opaque,
         );
-        return ret;
+        ret
     }
 }

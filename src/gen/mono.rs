@@ -38,13 +38,13 @@ impl Mono {
                     .color(color.get_full_value_color32()),
             );
         });
-        return ret;
+        ret
     }
 }
 
 impl super::Generate for Mono {
     fn get_name(&self) -> String {
-        return "\u{eae6} Mono".into();
+        "\u{eae6} Mono".into()
     }
     fn paint_ui(
         &mut self,
@@ -82,9 +82,9 @@ impl super::Generate for Mono {
                     image::Rgb([color.r, color.g, color.b]),
                 );
                 let img = image::DynamicImage::ImageRgb8(buffer);
-                return Some(img);
+                Some(img)
             }
-            None => return None,
+            None => None,
         }
     }
 }

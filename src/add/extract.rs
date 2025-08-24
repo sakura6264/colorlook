@@ -36,7 +36,7 @@ impl Extract {
 
 impl super::AddColor for Extract {
     fn get_name(&self) -> String {
-        return "\u{eae6} Extract Palette".into();
+        "\u{eae6} Extract Palette".into()
     }
     fn paint_ui(
         &mut self,
@@ -73,8 +73,8 @@ impl super::AddColor for Extract {
                 let img = buffer.clone().into_rgb8().into();
                 let max_color = self.max_color;
                 let basename = self.name.clone();
-                let algorithm = self.algo.clone();
-                let theme = self.theme.clone();
+                let algorithm = self.algo;
+                let theme = self.theme;
                 let (tx, rx) = mpsc::channel();
                 self.channel = Some(rx);
                 self.hthread = Some(thread::spawn(move || {
@@ -101,13 +101,13 @@ impl super::AddColor for Extract {
                             let pos = swatch.position();
                             let pop = swatch.population();
                             let name = format!("{}-({},{})-{}", basename, pos.0, pos.1, pop);
-                            let color = color_item::ColorItem {
-                                name: name,
+                            
+                            color_item::ColorItem {
+                                name,
                                 r: clr.r(),
                                 g: clr.g(),
                                 b: clr.b(),
-                            };
-                            color
+                            }
                         })
                         .collect();
                     colors.dedup();
@@ -127,6 +127,6 @@ impl super::AddColor for Extract {
                 return Some(colors);
             }
         }
-        return None;
+        None
     }
 }

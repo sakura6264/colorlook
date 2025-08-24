@@ -9,15 +9,15 @@ pub fn resized_str(name: &String, len: usize) -> String {
         name.truncate(len);
         name.push_str("...");
     }
-    return name;
+    name
 }
 
 pub fn get_random_name(len: usize) -> String {
-    let mut rng = rand::thread_rng();
+    let mut rng = rand::rng();
     let mut name = String::new();
     for _ in 0..len {
-        let c: char = rng.gen_range('a'..='z');
+        let c: char = rng.random_range('a'..='z');
         name.push(c);
     }
-    return name;
+    name
 }

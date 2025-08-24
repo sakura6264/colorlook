@@ -59,13 +59,13 @@ impl BlocksGenerator {
     fn get_color(&self, x: u32, y: u32) -> (u8, u8, u8) {
         let x_index = x * self.x_num / self.width;
         let y_index = y * self.y_num / self.height;
-        return self.data[y_index as usize][x_index as usize];
+        self.data[y_index as usize][x_index as usize]
     }
 }
 
 impl super::Generate for Blocks {
     fn get_name(&self) -> String {
-        return "\u{eae6} Blocks".into();
+        "\u{eae6} Blocks".into()
     }
     fn paint_ui(
         &mut self,
@@ -114,6 +114,6 @@ impl super::Generate for Blocks {
             });
             return Some(image::DynamicImage::ImageRgb8(buffer));
         }
-        return None;
+        None
     }
 }

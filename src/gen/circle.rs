@@ -58,15 +58,15 @@ impl CircleGenerator {
                 continue;
             }
         }
-        return (0, 0, 0);
+        (0, 0, 0)
     }
     fn get_dist(&self, x: u32, y: u32) -> f32 {
         let x = x as f32 - self.width as f32 / 2f32;
         let y = y as f32 - self.height as f32 / 2f32;
-        return (x * x + y * y).sqrt();
+        (x * x + y * y).sqrt()
     }
     fn get_dist_max(&self) -> f32 {
-        return ((self.width * self.width + self.height * self.height) as f32).sqrt() / 2f32;
+        ((self.width * self.width + self.height * self.height) as f32).sqrt() / 2f32
     }
 }
 
@@ -108,7 +108,7 @@ impl Circle {
 
 impl super::Generate for Circle {
     fn get_name(&self) -> String {
-        return "\u{eae6} Circle".into();
+        "\u{eae6} Circle".into()
     }
     fn paint_ui(
         &mut self,
@@ -147,8 +147,8 @@ impl super::Generate for Circle {
             if ui.button("\u{f0674} Generate").clicked() {
                 let thread_colors = colors.clone();
                 let thread_positions = self.positions.clone();
-                let thread_width = self.width.clone();
-                let thread_height = self.height.clone();
+                let thread_width = self.width;
+                let thread_height = self.height;
                 let (tx, rx) = mpsc::channel();
                 self.channel = Some(rx);
                 self.hthread = Some(thread::spawn(move || {
@@ -213,7 +213,7 @@ impl super::Generate for Circle {
                     painter.circle_stroke(center_pos, radius, stroke);
                 }
             }
-            return highlight;
+            highlight
         });
         if let Some(hl) = highlight.inner {
             ui.label(
@@ -240,6 +240,6 @@ impl super::Generate for Circle {
                 self.channel = None;
             }
         }
-        return None;
+        None
     }
 }

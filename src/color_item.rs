@@ -41,7 +41,7 @@ impl ColorItem {
         }
     }
     pub fn get_hex(&self) -> String {
-        return format!("#{:02x}{:02x}{:02x}", self.r, self.g, self.b);
+        format!("#{:02x}{:02x}{:02x}", self.r, self.g, self.b)
     }
 
     /// Creates a ColorItem from a hex color string (with or without #)
@@ -175,8 +175,8 @@ pub fn draw_color_items(ui: &mut egui::Ui, colors: &mut Vec<ColorItem>) {
             egui::color_picker::color_edit_button_srgb(ui, &mut rgb);
             ui.label(&color.name);
             ui.separator();
-            ui.label(RichText::new(&color.get_hex()).color(color.get_full_value_color32()));
-            return rgb;
+            ui.label(RichText::new(color.get_hex()).color(color.get_full_value_color32()));
+            rgb
         });
         color.r = newcolor.inner[0];
         color.g = newcolor.inner[1];

@@ -46,5 +46,5 @@ pub fn get_component_namelist() -> Vec<(String, AddColorComponent)> {
         "\u{ebac} Extract Palette".into(),
         AddColorComponent::Extract,
     ));
-    return list;
+    list
 }

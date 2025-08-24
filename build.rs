@@ -20,7 +20,7 @@ fn main() {
     } else {
         fs::create_dir_all(&dest_path).expect("failed to create presets output directory");
 
-        for entry in fs::read_dir(&assets_dir).expect("failed to read assets/presets directory") {
+        for entry in fs::read_dir(assets_dir).expect("failed to read assets/presets directory") {
             let entry = entry.expect("failed to read directory entry");
             let path = entry.path();
             if path.is_file() {

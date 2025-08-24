@@ -44,14 +44,14 @@ pub enum Tabs {
 
 impl MainWindowTabViewer {
     pub fn new() -> Self {
-        return Self {
+        Self {
             colors: Vec::new(),
             image: PLACEHOLDER.clone(),
             texture_id: None,
             add_component: None,
             gen_component: None,
             ui_msg: None,
-        };
+        }
     }
     pub fn update_texture(&mut self, ctx: &egui::Context) {
         let manager = ctx.tex_manager();
@@ -175,14 +175,14 @@ impl MainWindow {
             .main_surface_mut()
             .split_left(b, 0.5, vec![Tabs::Colors]);
 
-        return Self {
+        Self {
             toasts: egui_toast::Toasts::new()
                 .anchor(egui::Align2::LEFT_BOTTOM, (MARGIN, -MARGIN))
                 .direction(egui::Direction::BottomUp),
             file_dialog: FileDialog::None,
             tab_viewer: MainWindowTabViewer::new(),
             dock_tree: tree,
-        };
+        }
     }
 }
 
@@ -326,14 +326,14 @@ impl eframe::App for MainWindow {
                 ui.menu_button("\u{eae4} Window", |ui| {
                     let getlabel = |tab, text| {
                         if self.dock_tree.find_tab(tab).is_some() {
-                            return egui::RichText::new(text).color(egui::Color32::YELLOW);
+                            egui::RichText::new(text).color(egui::Color32::YELLOW)
                         } else {
-                            return egui::RichText::new(text);
+                            egui::RichText::new(text)
                         }
                     };
                     for (tab, text) in TABLIST.iter() {
                         if ui.button(getlabel(tab, text)).clicked() {
-                            ui_msg = Some(Msg::AdjustTab(tab.clone()));
+                            ui_msg = Some(Msg::AdjustTab(*tab));
                         }
                     }
                 });
@@ -341,7 +341,7 @@ impl eframe::App for MainWindow {
                     for (name, component) in crate::add::NAMELIST.iter() {
                         if ui.button(name).clicked() {
                             self.tab_viewer.add_component =
-                                Some(crate::add::get_component(component.clone()));
+                                Some(crate::add::get_component(*component));
                             // Focus on the Add tab when component changes
                             self.focus_tab(Tabs::Add);
                         }
@@ -351,7 +351,7 @@ impl eframe::App for MainWindow {
                     for (name, component) in crate::gen::NAMELIST.iter() {
                         if ui.button(name).clicked() {
                             self.tab_viewer.gen_component =
-                                Some(crate::gen::get_component(component.clone()));
+                                Some(crate::gen::get_component(*component));
                             // Focus on the Generate tab when component changes
                             self.focus_tab(Tabs::Gen);
                         }
@@ -362,19 +362,16 @@ impl eframe::App for MainWindow {
                 .style(egui_dock::Style::from_egui(ctx.style().as_ref()))
                 .show_inside(ui, &mut self.tab_viewer);
         });
-        match &mut self.tab_viewer.ui_msg {
-            Some(msg) => {
-                match msg {
-                    TabMsg::Add(color) => {
-                        ui_msg = Some(Msg::Add(color.clone()));
-                    }
-                    TabMsg::Gen(img) => {
-                        ui_msg = Some(Msg::Gen(img.clone()));
-                    }
+        if let Some(msg) = &mut self.tab_viewer.ui_msg {
+            match msg {
+                TabMsg::Add(color) => {
+                    ui_msg = Some(Msg::Add(color.clone()));
                 }
-                self.tab_viewer.ui_msg = None;
+                TabMsg::Gen(img) => {
+                    ui_msg = Some(Msg::Gen(img.clone()));
+                }
             }
-            None => {}
+            self.tab_viewer.ui_msg = None;
         }
         self.toasts.show(ctx);
         match &mut self.file_dialog {
@@ -492,7 +489,7 @@ impl eframe::App for MainWindow {
                         self.tab_viewer.colors.sort_by(|a, b| a.g.cmp(&b.g));
                     }
                     MsgColor::SortByB => {
-                        self.tab_viewer.colors.sort_by(|a, b| a.b.cmp(&b.b));
+                        self.tab_viewer.colors.sort_by_key(|a| a.b);
                     }
                     MsgColor::SortByH => {
                         self.tab_viewer
